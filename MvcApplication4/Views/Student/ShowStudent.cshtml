@@ -1,0 +1,27 @@
+﻿@using MvcApplication4.Models
+@model Student
+
+@{
+    ViewBag.Title = "ShowStudent";
+}
+
+<h2>ShowStudent</h2>
+
+@{
+
+    if (@Model == null) 
+    {
+        <p>Geen match gevonden</p>
+    }
+    else
+    {
+        <div>
+            Gevonden student:<br />
+            <div id="studGegevens">
+                Mijn voornaam: @Model.voornaam <br>
+                Mijn achternaam: @Model.achternaam <br>
+                Mijn woonplaats: @Model.woonplaats
+            </div>
+        </div>
+    }
+}
