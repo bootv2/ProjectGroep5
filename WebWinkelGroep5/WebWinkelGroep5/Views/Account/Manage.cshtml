@@ -1,4 +1,4 @@
-﻿@model WebWinkelGroep5.Models.LocalPasswordModel
+﻿@model WebWinkelGroep5.Models.LocalManagementModel
 @{
     ViewBag.Title = "Manage Account";
 }
@@ -14,6 +14,7 @@
 @if (ViewBag.HasLocalPassword)
 {
     @Html.Partial("_ChangePasswordPartial")
+    @Html.Partial("_ChangeEmailPartial")
 }
 else
 { 

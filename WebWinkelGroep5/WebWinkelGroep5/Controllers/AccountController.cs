@@ -13,10 +13,12 @@ using WebWinkelGroep5.Models;
 
 namespace WebWinkelGroep5.Controllers
 {
+    
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        public DatabaseController db = new DatabaseController();
         //
         // GET: /Account/Login
 
@@ -142,7 +144,7 @@ namespace WebWinkelGroep5.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Manage(LocalPasswordModel model)
+        public ActionResult Manage(LocalManagementModel model)
         {
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;

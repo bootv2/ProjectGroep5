@@ -158,3 +158,4 @@ C:\Users\TTT\Documents\Visual Studio 2010\Projects\ProjectGroep5\WebWinkelGroep5
 C:\Users\TTT\Documents\Visual Studio 2010\Projects\ProjectGroep5\WebWinkelGroep5\WebWinkelGroep5\obj\Debug\WebWinkelGroep5.csprojResolveAssemblyReference.cache
 C:\Users\TTT\Documents\Visual Studio 2010\Projects\ProjectGroep5\WebWinkelGroep5\WebWinkelGroep5\obj\Debug\WebWinkelGroep5.dll
 C:\Users\TTT\Documents\Visual Studio 2010\Projects\ProjectGroep5\WebWinkelGroep5\WebWinkelGroep5\obj\Debug\WebWinkelGroep5.pdb
+C:\Users\TTT\Documents\Visual Studio 2010\Projects\ProjectGroep5\WebWinkelGroep5\WebWinkelGroep5\bin\MySql.Data.dll
