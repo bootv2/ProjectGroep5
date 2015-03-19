@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create a new account.</h2>
+</hgroup>
+
+<form action="/Account/Register" method="get">
+    <br> Gebruikersnaam<br>
+    <input name="username" size="30" type="text">
+    <br> Wachtwoord<br>
+    <input name="password" size="30" type="password">
+    <br> E-mail adres<br>
+    <input name="email" size="30" type="text">
+    <input value="Log In" type="submit">
+</form>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

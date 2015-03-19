@@ -8,20 +8,35 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using WebWinkelGroep5.Filters;
-using WebWinkelGroep5.Models;
 using MySql.Data.MySqlClient;
 
 namespace WebWinkelGroep5.Controllers
 {
-    public abstract class DatabaseController : Controller
+    public static class DatabaseController
     {
-        protected MySqlConnection conn;
 
-        public DatabaseController()
+        private static MySqlConnection conn;
+
+        public static void initDatabaseController()
         {
             //Vul hier de juiste gegevens in!!
-            conn = new MySqlConnection("Server=127.0.0.1:3307;Database=webwinkel;Uid=bootv2;Pwd=33662648;");
+            conn = new MySqlConnection("Server=87.211.14.64:3307;Database=webwinkel;Uid=bootv2;Pwd=Moortje%4;");
+            
+                /*try
+                {
+                    conn.Open();
+                }
+                catch (MySqlException ex)
+                {
+                    throw (ex);
+                }*/
         }
+
+        public static bool login(String username, String password)
+        {
+            //conn.
+            return true;
+        }
+
     }
 }
