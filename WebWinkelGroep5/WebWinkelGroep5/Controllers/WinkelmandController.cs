@@ -22,5 +22,17 @@ namespace WebWinkelGroep5.Controllers
             return View();
         }
 
+        public ActionResult WinkelmandLeeg()
+        {
+            ViewBag.Message = "De winkelwagen is op het moment leeg! Klik de + bij een product om dit product aan de winkelwagen toe te voegen!";
+            return View();
+        }
+
+        public ActionResult Winkelmand()
+        {
+            ViewBag.Message = "";
+            return View();
+        }
+
     }
 }
