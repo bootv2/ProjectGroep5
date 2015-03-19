@@ -16,9 +16,8 @@ namespace WebWinkelGroep5.Controllers
     
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : DatabaseController
     {
-        public DatabaseController db = new DatabaseController();
         //
         // GET: /Account/Login
 
