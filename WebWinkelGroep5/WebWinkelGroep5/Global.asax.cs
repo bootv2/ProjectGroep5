@@ -24,6 +24,8 @@ namespace WebWinkelGroep5
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DatabaseController.initDatabaseController();
+            WinkelmandController.productDictionary = new Dictionary<int, String>();
+            WinkelmandController.productDictionary.Add(0, "");
         }
     }
 }
