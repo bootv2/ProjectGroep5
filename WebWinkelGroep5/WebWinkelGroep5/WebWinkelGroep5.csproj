@@ -313,6 +313,7 @@
     <Content Include="Views\Winkelmand\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Winkelmand\WinkelmandLeeg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Winkelmand";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+  <table width='100%'>
+    <thead>
+        <tr>
+            <th width='25%'>Category</th>
+            <th width='25%'>Product</th>
+            <th class='price' width='15%'>Price</th>
+            <th class='quantity' width='10%'>Quantity</th>
+            <th class='price' width='15%'>Subtotal</th>
+            <th width='10%'> </th>
+        </tr>
+    </thead>
+        <tr>
+            <td>
+                <select>
+                <option value="stoel">Stoel</option>
+                <option value="kast">Kast</option>
+                <option value="tafel">Tafel</option>
+                 </select>
+            </td>
+            <td>
+                <select>
+                    <option value="stoel">Stoel</option>
+                    <option value="kast">Kast</option>
+                    <option value="tafel">Tafel</option>
+                </select>
+            </td>
+            <td class='price' data-bind='with: product'>
+                <span data-bind='text: formatCurrency(price)'> </span>
+            </td>
+            <td class='quantity'>
+                <input data-bind='visible: product, value: quantity, valueUpdate: "afterkeydown"' />
+            </td>
+            <td class='price'>
+                <span data-bind='visible: product, text: formatCurrency(subtotal())'> </span>
+            </td>
+            <td>
+                <a href='#' data-bind='click: $parent.removeLine'>Remove</a>
+            </td>
+        </tr>
+</table>
+<p class='grandTotal'>
+    Total value: <span data-bind='text: formatCurrency(grandTotal())'> </span>
+</p>
+<button data-bind='click: addLine'>Add product</button>
+<button data-bind='click: save'>Submit order</button>

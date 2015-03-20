@@ -30,7 +30,7 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Winkelmand()
         {
-            ViewBag.Message = "";
+            ViewBag.Message = "De volgende producten zitten in de winkelmand";
             return View();
         }
 
