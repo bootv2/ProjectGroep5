@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Helpers;
 
 namespace WebWinkelGroep5.Controllers
 {
@@ -20,6 +22,24 @@ namespace WebWinkelGroep5.Controllers
         {
             return View();
         }
+
+
+        protected void Upload(object sender, EventArgs e)
+        {
+            /*if (FileUpload1.HasFile)
+            {
+                string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+                FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Images/") + fileName);
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }*/
+        }
+
+        public ActionResult ImageUpload()
+        {
+            
+            return View();
+        }
+
 
     }
 }

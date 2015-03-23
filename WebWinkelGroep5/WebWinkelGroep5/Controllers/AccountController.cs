@@ -32,8 +32,16 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Register(String username, String password, String email)
         {
-            DatabaseController.register(username, password, email);
-            ViewBag.message = username + " successfully registered";
+            if (DatabaseController.register(username, password, email))
+            {
+                ViewBag.Head = "Success!";
+                ViewBag.message = username + " successfully registered";
+            }
+            else
+            {
+                ViewBag.Head = "Error!";
+                ViewBag.message = "Username or email already in use.";
+            }
             return View();
         }
 

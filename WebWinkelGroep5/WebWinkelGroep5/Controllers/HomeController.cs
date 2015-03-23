@@ -17,15 +17,25 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Over ons";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact";
 
+            return View();
+        }
+
+        public ActionResult TOS()
+        {
+            return View();
+        }
+
+        public ActionResult Disclaimer()
+        {
             return View();
         }
     }

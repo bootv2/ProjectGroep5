@@ -35,7 +35,7 @@ namespace WebWinkelGroep5.Controllers
         public static bool login(String username, String password)
         {
             String pw;
-            String query = "SELECT password FROM users WHERE userId='" + username + "';";
+            String query = "SELECT password FROM users WHERE username='" + username + "';";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
@@ -52,13 +52,21 @@ namespace WebWinkelGroep5.Controllers
                 return false;
         }
 
-        public static void register(String username, String password, String email)
+        public static bool register(String username, String password, String email)
         {
             String query = "INSERT INTO users(username, password, email) VALUES('" + username +"', '" + password +"', '" + email +"');";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
-            cmd.ExecuteNonQuery();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch(MySqlException ex)
+            {
+                return false;
+            }
+            return true;
         }
 
     }
