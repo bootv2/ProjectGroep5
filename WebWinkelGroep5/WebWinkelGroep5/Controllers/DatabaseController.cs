@@ -20,16 +20,16 @@ namespace WebWinkelGroep5.Controllers
         public static void initDatabaseController()
         {
             //Vul hier de juiste gegevens in!!
-            conn = new MySqlConnection("Server=87.211.14.64:3307;Database=webwinkel;Uid=bootv2;Pwd=Moortje%4;");
+            conn = new MySqlConnection("server=127.0.0.1; database=webwinkel; user id=root; password=33662648; pooling = false;");
             
-                /*try
+                try
                 {
                     conn.Open();
                 }
                 catch (MySqlException ex)
                 {
                     throw (ex);
-                }*/
+                }
         }
 
         public static bool login(String username, String password)

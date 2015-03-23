@@ -253,6 +253,14 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\appel.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\stoel1.jpg" />
+    <Content Include="Images\stoel2.jpg" />
+    <Content Include="Images\stoel3.jpg" />
+    <Content Include="Images\stoel4.jpg" />
+    <Content Include="Images\stoel5.jpg" />
+    <Content Include="Images\stoel6.jpg" />
+    <Content Include="Images\stoel7.jpg" />
+    <Content Include="Images\stoel8.jpg" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
