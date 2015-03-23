@@ -34,8 +34,31 @@ namespace WebWinkelGroep5.Controllers
 
         public static bool login(String username, String password)
         {
-            //conn.
-            return true;
+            String pw;
+            String query = "SELECT password FROM users WHERE userId='" + username + "';";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            //Create a data reader and Execute the command
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+
+            if(dataReader.Read())
+                pw = dataReader.GetString("password");
+            else return false;
+
+            if (pw.CompareTo(password) == 0)
+                return true;
+            else
+                return false;
+        }
+
+        public static void register(String username, String password, String email)
+        {
+            String query = "INSERT INTO users(username, password, email) VALUES('" + username +"', '" + password +"', '" + email +"');";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            cmd.ExecuteNonQuery();
         }
 
     }

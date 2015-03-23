@@ -18,7 +18,7 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Login(String username, String password)
         {
-            if(username.CompareTo("admin") == 0 && password.CompareTo("admin") == 0)
+            if(DatabaseController.login(username, password))
                 ViewBag.message = username + " Logged In!";
             else ViewBag.message = "Username or password wrong!";
 
@@ -32,6 +32,7 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Register(String username, String password, String email)
         {
+            DatabaseController.register(username, password, email);
             ViewBag.message = username + " successfully registered";
             return View();
         }
