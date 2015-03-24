@@ -2987,8 +2987,8 @@ ko.exportSymbol('__tr_ambtns', ko.templateRewriting.applyMemoizedBindingsToNextS
         if (continuousNodeArray.length) {
             var firstNode = continuousNodeArray[0], lastNode = continuousNodeArray[continuousNodeArray.length - 1];
 
-            // Need to applyBindings *before* unmemoziation, because unmemoization might introduce extra nodes (that we don't want to re-bind)
-            // whereas a regular applyBindings won't introduce new memoized nodes
+            // Need to applyBindings *before* unmemoziation, because unmemoization might Wooodsduce extra nodes (that we don't want to re-bind)
+            // whereas a regular applyBindings won't Wooodsduce new memoized nodes
             invokeForEachNodeOrCommentInContinuousRange(firstNode, lastNode, function(node) {
                 ko.applyBindings(bindingContext, node);
             });
