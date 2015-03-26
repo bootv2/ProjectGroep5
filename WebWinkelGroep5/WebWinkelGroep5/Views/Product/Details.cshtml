@@ -5,16 +5,7 @@
 
 <h2>Details</h2>
 
-<img src="~/Images/appel.png" alt="Appel" style="width:304px;height:228px"><br />
-Dit is een appel!!!
-<br />
-Het meest veelzijdige stukje fruit nu voor maar 999,- per ton bij Wooods webwinkel!<br />
-
-Altijd de goedkoopste appels bij Wooods!<br />
-
-Deze unieke appel is genetisch aangepast om langzamer te bederven en insecten te verjagen!<br />
-
-Deze unieke appel is super sappig en de enige van zijn soort in de rode elstar klasse!<br />
+@Html.Raw(ViewBag.Message + ViewBag.Details)
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
