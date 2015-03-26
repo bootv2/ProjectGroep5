@@ -20,7 +20,7 @@ namespace WebWinkelGroep5.Controllers
         public static void initDatabaseController()
         {
             //Vul hier de juiste gegevens in!!
-            conn = new MySqlConnection("server=127.0.0.1; database=webwinkelinfc; user id=root; password=; pooling = false;");
+            conn = new MySqlConnection("server=127.0.0.1; database=webwinkel; user id=root; password=33662648; pooling = false;");
             
                 try
                 {
@@ -47,6 +47,25 @@ namespace WebWinkelGroep5.Controllers
             else return false;
 
             if (pw.CompareTo(password) == 0)
+                return true;
+            else
+                return false;
+        }
+        public static bool isAdmin(String username)
+        {
+            int status;
+            String query = "SELECT adminStatus FROM users WHERE username='" + username + "';";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            //Create a data reader and Execute the command
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+
+            if (dataReader.Read())
+                status = dataReader.GetInt32("adminStatus");
+            else return false;
+
+            if (status > 0)
                 return true;
             else
                 return false;
@@ -82,6 +101,42 @@ namespace WebWinkelGroep5.Controllers
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
+        }
+
+        public static void changeProduct(int productId, String name, int price, String details, String imageURL)
+        {
+            String query = "UPDATE products SET ";
+            if(name.CompareTo("") == 0 && price == -1 && details.CompareTo("") == 0)//change image
+            {
+                query += "imageURL='" + imageURL + "' WHERE productId=" + productId;
+            }
+            else if (name.CompareTo("") == 0 && price == -1 && imageURL.CompareTo("") == 0)//change details
+            {
+                query += "details='" + details + "' WHERE productId=" + productId;
+            }
+            else if (name.CompareTo("") == 0 && imageURL.CompareTo("") == 0 && details.CompareTo("") == 0)//change price
+            {
+                query += "price=" + price + " WHERE productId=" + productId;
+            }
+            else if (imageURL.CompareTo("") == 0 && price == -1 && details.CompareTo("") == 0)//change name
+            {
+                query += "name='" + name + "' WHERE productId=" + productId;
+            }
+            else
+                System.Diagnostics.Debug.WriteLine("DO NOT PASS MULTIPLE FILLED VARIABLES! you can only change one at a time!");
+            
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+
         }
 
     }

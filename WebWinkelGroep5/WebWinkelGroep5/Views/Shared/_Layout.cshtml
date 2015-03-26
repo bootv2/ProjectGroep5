@@ -25,6 +25,15 @@
                             <li>@Html.ActionLink("Contact", "Contact", "SendMailer")</li>
                             <li><a href="~/Home/TOS">Terms of service</a></li>
                             <li><a href="~/Home/Disclaimer">Disclaimer</a></li>
+                            @{
+                                if (Session["isAdmin"] != null)
+                                {
+                                    if ((bool)Session["isAdmin"])
+                                    {
+                                        <li><a href="~/Admin/">Admin panel</a></li>
+                                    }
+                                }
+                            }
 </ul>
                     </nav>
                 </div>

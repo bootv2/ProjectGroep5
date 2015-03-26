@@ -1,11 +1,23 @@
-﻿
+﻿@{
+    if (Session["Username"] == null)
+    {
+        ViewBag.Username = "";
+    }
+    else
+    { 
+        ViewBag.Username = ", " + Session["Username"];
+    }
+}
+
+
     <text>
-        Hello, User! 
+        Hallo @ViewBag.Username !
         
-        <a href="~Account/Logoff">Log off</a>
+        
         
     </text>
     <ul>
         <li><a href="~/Account/RegisterPage">Register</a></li>
+        <a href="~/Account/Logoff">Log off</a>
         <li><a href="~/Account/LoginPage">Log In</a></li>
     </ul>

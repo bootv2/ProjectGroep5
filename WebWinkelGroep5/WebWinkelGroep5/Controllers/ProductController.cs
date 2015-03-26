@@ -36,21 +36,37 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult changeImage()
         {
+            String newFileName = "";
+
+            WebImage photo = WebImage.GetImageFromRequest();
+            if (photo != null)
+            {
+                newFileName = Guid.NewGuid().ToString() + "_" +
+                    Path.GetFileName(photo.FileName);
+
+                photo.Save(@"~/Images/" + newFileName);
+                ViewBag.Image = newFileName;
+
+                DatabaseController.changeProduct((int)Session["productId"], "", -1, "", "~/Images/" + newFileName);
+            }
             return View();
         }
 
         public ActionResult changeName(String name)
         {
+            DatabaseController.changeProduct((int)Session["productId"], name, -1, "", "");
             return View();
         }
 
         public ActionResult changeDetails(String details)
         {
+            DatabaseController.changeProduct((int)Session["productId"], "", -1, details, "");
             return View();
         }
 
         public ActionResult changePrice(int price)
         {
+            DatabaseController.changeProduct((int)Session["productId"], "", price, "", "");
             return View();
         }
 

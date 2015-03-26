@@ -22,7 +22,8 @@ namespace WebWinkelGroep5.Controllers
                 {
                     ViewBag.message = username + " Logged In!";
 
-                    Session["UserName"] = username;
+                    Session["Username"] = username;
+                    Session["isAdmin"] = DatabaseController.isAdmin(username);
                 }
 
             else
@@ -54,6 +55,7 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Logoff()
         {
+            Session["Username"] = null;
             return View();
         }
 
