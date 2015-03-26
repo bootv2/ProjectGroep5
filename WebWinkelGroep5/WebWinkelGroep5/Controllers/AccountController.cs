@@ -19,9 +19,16 @@ namespace WebWinkelGroep5.Controllers
         public ActionResult Login(String username, String password)
         {
             if(DatabaseController.login(username, password))
-                ViewBag.message = username + " Logged In!";
-            else ViewBag.message = "Username or password wrong!";
+                {
+                    ViewBag.message = username + " Logged In!";
 
+                    Session["UserName"] = username;
+                }
+
+            else
+                { 
+                    ViewBag.message = "Username or password wrong!";
+                }
             return View();
         }
 
