@@ -187,10 +187,12 @@
     <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SendMailerController.cs" />
     <Compile Include="Controllers\WinkelmandController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -326,11 +328,11 @@
     <Content Include="Views\Home\Disclaimer.cshtml" />
     <Content Include="Views\Home\TOS.cshtml" />
     <Content Include="Views\Product\ImageUpload.cshtml" />
+    <Content Include="Views\Winkelmand\mailtest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
