@@ -2,6 +2,8 @@
     ViewBag.Title = "Contact";
 }
 
+@model WebWinkelGroep5.Models.MailModel
+
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
     <h2>@ViewBag.Message</h2>
@@ -24,18 +26,22 @@
     </p>
 </section>
 
-<section class="contact">
-    <header>
-        <h3>Email</h3>
-        <p>Neem contact met ons op via het contactformulier</p>
-    </header>
-    <input name="action" value="submit" type="hidden"> Naam:<br>
-    <input name="name" size="30" type="text"><br> E-mail adres:<br>
-    <input name="email" size="30" type="text"><br> Uw bericht:<br>
-    <textarea name="message" rows="7" cols="30"></textarea><br>
-    <input value="Verzend" type="submit">
-    </form>
-</section>
+<fieldset>
+    <p>
+        <span class="label">E-mail:</span>
+    </p>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <p>Van: </p>
+        <p>@Html.TextBoxFor(m => m.From)</p>
+        <p>Onderwerp: </p>
+        <p>@Html.TextBoxFor(m => m.Subject)</p>
+        <p>Bericht: </p>
+        <p>@Html.TextAreaFor(m => m.Body)</p>
+        <input type="submit" value="Send" />
+    }
+</fieldset>
 
 <section class="contact">
     <header>
