@@ -53,12 +53,10 @@ namespace WebWinkelGroep5.Controllers
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new System.Net.NetworkCredential
-<<<<<<< HEAD
                 ("wooods@compuboot.in", "Wooods1234");// Enter seders User name and password
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
                 return View("mailtest   ", _objModelMail);
-=======
                 ("wooods@gmail.com", "Wooods1234");// Enter seders User name and password
                 smtp.EnableSsl = true;*/
                 smtpClient.Send(mail);
@@ -101,8 +99,6 @@ namespace WebWinkelGroep5.Controllers
 
                 smtpClient.Send(mail);
                 return View("Contact", _objModelMail);
-
->>>>>>> 8d5c996629f189235607200eec85011cdf42d564
             }
             else
             {
