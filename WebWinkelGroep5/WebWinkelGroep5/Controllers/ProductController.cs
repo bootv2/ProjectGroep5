@@ -23,20 +23,56 @@ namespace WebWinkelGroep5.Controllers
             return View();
         }
 
-
-        protected void Upload(object sender, EventArgs e)
-        {
-            /*if (FileUpload1.HasFile)
-            {
-                string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
-                FileUpload1.PostedFile.SaveAs(Server.MapPath("~/Images/") + fileName);
-                Response.Redirect(Request.Url.AbsoluteUri);
-            }*/
-        }
-
-        public ActionResult ImageUpload()
+        public ActionResult NewProduct()
         {
             
+            return View();
+        }
+
+        public ActionResult changeProduct()
+        {
+            return View();
+        }
+
+        public ActionResult changeImage()
+        {
+            return View();
+        }
+
+        public ActionResult changeName(String name)
+        {
+            return View();
+        }
+
+        public ActionResult changeDetails(String details)
+        {
+            return View();
+        }
+
+        public ActionResult changePrice(int price)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Upload(String name, int price, String details)
+        {
+            String newFileName = "";
+            
+            WebImage photo = WebImage.GetImageFromRequest();
+            if (photo != null)
+            {
+                newFileName = Guid.NewGuid().ToString() + "_" +
+                    Path.GetFileName(photo.FileName);
+
+                photo.Save(@"~/Images/" + newFileName);
+                ViewBag.Image = newFileName;
+
+                DatabaseController.addProduct(name, price, details, "~/Images/" + newFileName);
+            }
+
+            
+
             return View();
         }
 

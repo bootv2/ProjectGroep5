@@ -327,8 +327,9 @@
     <Content Include="Views\Product\Upload.cshtml" />
     <Content Include="Views\Home\Disclaimer.cshtml" />
     <Content Include="Views\Home\TOS.cshtml" />
-    <Content Include="Views\Product\ImageUpload.cshtml" />
+    <Content Include="Views\Product\NewProduct.cshtml" />
     <Content Include="Views\Winkelmand\mailtest.cshtml" />
+    <Content Include="Views\Product\ChangeProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

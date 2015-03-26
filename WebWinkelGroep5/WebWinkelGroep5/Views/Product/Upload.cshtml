@@ -1,17 +1,27 @@
 ﻿@{
-    ViewBag.Title = "Upload";
+    ViewBag.Title = "ImageUpload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<form action="~/Product/Upload" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend> Upload Image </legend>
+        <label for="Image">Image</label>
+        <input type="file" name="Image" />
+        <br />
+        <input type="submit" value="Upload" />
+        <input name="action" value="submit" type="hidden">
+        Naam:<br>
+        <input name="name" size="30" type="text"><br> Prijs:<br>
+        <input name="price" size="30" type="number"><br> Details:<br>
+        <textarea name="details" rows="7" cols="30"></textarea><br>
+        <input value="Verzend" type="submit">
+    </fieldset>
+</form>
+<h1>Uploaded Image</h1>
+@if (ViewBag.Image != "" && ViewBag.Image != null)
+{
+    <div class="result">
+        <img src="~/Images/@ViewBag.Image" alt="image" />
 
-<h2>Upload</h2>
-
-
-<!--asp:FileUpload ID="FileUpload1" runat="server" />
-<asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />
-<hr />
-<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" ShowHeader="false">
-    <columns>
-        <asp:boundfield datafield="Text" />
-        <asp:imagefield dataimageurlfield="Value" controlstyle-height="100" controlstyle-width="100" />
-    </columns>
-</asp:GridView-->
+    </div>
+}

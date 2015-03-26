@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "ImageUpload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <form action="~/Product/Upload" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend> Upload Image </legend>
+            <label for="Image">Image</label>
+            <input type="file" name="Image" />
+            <br />
+            <input type="submit" value="Upload" />
+            <input name="action" value="submit" type="hidden"> 
+            Naam:<br>
+            <input name="name" size="30" type="text"><br> Prijs:<br>
+            <input name="price" size="30" type="number"><br> Details:<br>
+            <textarea name="details" rows="7" cols="30"></textarea><br>
+            <input value="Verzend" type="submit">
+        </fieldset>
+    </form>

@@ -69,5 +69,20 @@ namespace WebWinkelGroep5.Controllers
             return true;
         }
 
+        public static void addProduct(String name, int price, String details, String imageURL)
+        {
+            String query = "INSERT INTO products(name, price, details, imageURL) VALUES('" + name + "', " + price + ", '" + details + "', '" + imageURL + "');";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+        }
+
     }
 }

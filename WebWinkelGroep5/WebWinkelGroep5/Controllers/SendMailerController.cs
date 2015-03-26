@@ -33,7 +33,7 @@ namespace WebWinkelGroep5.Controllers
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new System.Net.NetworkCredential
-                ("username", "password");// Enter seders User name and password
+                ("wooods@compuboot.in", "Wooods1234");// Enter seders User name and password
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
                 return View("mailtest   ", _objModelMail);
