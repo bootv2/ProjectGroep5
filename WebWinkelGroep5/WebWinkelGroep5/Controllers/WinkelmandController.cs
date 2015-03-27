@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections;
+using WebWinkelGroep5.Models;
 
 namespace WebWinkelGroep5.Controllers
 {
@@ -11,7 +12,7 @@ namespace WebWinkelGroep5.Controllers
     {
 
         public static Dictionary<int, String> productDictionary;
-        
+
         //
         // GET: /Winkelmand/
 
@@ -32,6 +33,23 @@ namespace WebWinkelGroep5.Controllers
         {
             ViewBag.Message = "De volgende producten zitten in de winkelmand";
             return View();
+        }
+
+        public ActionResult Winkelwagen()
+        {
+            try
+            {
+                Bestelling bestelling = new Bestelling();
+                /*List<Bestelling> bestellingen = DatabaseController.GetWinkelwagen(userId);
+                bestelling.lijst = bestellingen;*/
+                return View(bestelling);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = "Er is een fout opgetreden" + e;
+                return View();
+            }
+
         }
 
     }

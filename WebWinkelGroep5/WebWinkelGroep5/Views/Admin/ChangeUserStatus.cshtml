@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "ChangeUserStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Status Changed!</h2>
+<form action="~/Admin/ChangeUserStatus" method="post" enctype="multipart/form-data">
+    <fieldset>
+        Naam:<br>
+        <input name="name" size="30" type="text"><br> status:<br>
+        <input name="status" size="30" type="number"><br>
+        <input value="Verzend" type="submit">
+    </fieldset>
+</form>

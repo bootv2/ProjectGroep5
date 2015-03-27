@@ -56,6 +56,7 @@ namespace WebWinkelGroep5.Controllers
         public ActionResult Logoff()
         {
             Session["Username"] = null;
+            Session["isAdmin"] = null;
             return View();
         }
 

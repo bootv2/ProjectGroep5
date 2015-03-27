@@ -184,6 +184,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bestelling.cs" />
     <Compile Include="Models\MailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -252,9 +254,24 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\.DS_Store" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\appel.png" />
+    <Content Include="Images\borat.jpg" />
+    <Content Include="Images\bruno.jpg" />
+    <Content Include="Images\candy.jpg" />
+    <Content Include="Images\dick.jpg" />
+    <Content Include="Images\dog.jpg" />
+    <Content Include="Images\donjuan.jpg" />
+    <Content Include="Images\grijs.jpg" />
+    <Content Include="Images\hans.jpg" />
+    <Content Include="Images\henkjansmith.jpg" />
+    <Content Include="Images\jensen.jpg" />
+    <Content Include="Images\jeroengrijs.jpg" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\opl.jpg" />
+    <Content Include="Images\plopper.jpg" />
+    <Content Include="Images\recep.png" />
     <Content Include="Images\stoel1.jpg" />
     <Content Include="Images\stoel2.jpg" />
     <Content Include="Images\stoel3.jpg" />
@@ -263,6 +280,12 @@
     <Content Include="Images\stoel6.jpg" />
     <Content Include="Images\stoel7.jpg" />
     <Content Include="Images\stoel8.jpg" />
+    <Content Include="Images\tafel1.jpg" />
+    <Content Include="Images\tafel2.jpg" />
+    <Content Include="Images\tafel3.jpg" />
+    <Content Include="Images\tafel4.jpg" />
+    <Content Include="Images\tafel5.jpg" />
+    <Content Include="Images\tante es.jpg" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -330,6 +353,14 @@
     <Content Include="Views\Product\NewProduct.cshtml" />
     <Content Include="Views\Winkelmand\mailtest.cshtml" />
     <Content Include="Views\Product\ChangeProduct.cshtml" />
+    <Content Include="Views\Product\ChangeImage.cshtml" />
+    <Content Include="Views\Product\ChangeName.cshtml" />
+    <Content Include="Views\Product\ChangePrice.cshtml" />
+    <Content Include="Views\Product\ChangeDetails.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\ChangeUserStatus.cshtml" />
+    <Content Include="Views\Admin\ManageUser.cshtml" />
+    <Content Include="Views\Home\Werknemers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

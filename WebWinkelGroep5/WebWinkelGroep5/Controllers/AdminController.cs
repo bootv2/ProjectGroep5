@@ -16,5 +16,16 @@ namespace WebWinkelGroep5.Controllers
             return View();
         }
 
+        public ActionResult ManageUser()
+        {
+            return View();
+        }
+
+        public ActionResult ChangeUserStatus(int status, String name)
+        {
+            DatabaseController.editAdminStatus(status, name);
+            return View();
+        }
+
     }
 }

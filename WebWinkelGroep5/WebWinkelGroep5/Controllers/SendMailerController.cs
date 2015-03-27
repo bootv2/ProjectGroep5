@@ -61,7 +61,7 @@ namespace WebWinkelGroep5.Controllers
                 smtp.EnableSsl = true;*/
                 smtpClient.Send(mail);
                 return View("mailtest", _objModelMail);
-                
+
             }
             else
             {

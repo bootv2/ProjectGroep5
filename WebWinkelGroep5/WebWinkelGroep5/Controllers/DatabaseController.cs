@@ -14,6 +14,7 @@ namespace WebWinkelGroep5.Controllers
 {
     public static class DatabaseController
     {
+        //TODO: get array of all products
 
         private static MySqlConnection conn;
 
@@ -38,12 +39,23 @@ namespace WebWinkelGroep5.Controllers
             String query = "SELECT password FROM users WHERE username='" + username + "';";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dataReader;
 
-            //Create a data reader and Execute the command
-            MySqlDataReader dataReader = cmd.ExecuteReader();
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch(MySqlException ex)
+            {
+                throw new Exception();
+            }
 
-            if(dataReader.Read())
+            if (dataReader.Read())
+            {
                 pw = dataReader.GetString("password");
+                dataReader.Close();
+            }
             else return false;
 
             if (pw.CompareTo(password) == 0)
@@ -58,17 +70,44 @@ namespace WebWinkelGroep5.Controllers
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
-            //Create a data reader and Execute the command
-            MySqlDataReader dataReader = cmd.ExecuteReader();
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception();
+            }
 
             if (dataReader.Read())
+            {
                 status = dataReader.GetInt32("adminStatus");
+                dataReader.Close();
+            }
             else return false;
 
             if (status > 0)
                 return true;
             else
                 return false;
+        }
+
+        public static void editAdminStatus(int status, String username)
+        {
+            String query = "UPDATE users SET adminStatus=" + status + " WHERE username='" + username + "'";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            
         }
 
         public static bool register(String username, String password, String email)
@@ -101,6 +140,153 @@ namespace WebWinkelGroep5.Controllers
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
+            resetAutoIncrement();
+        }
+
+        private static void resetAutoIncrement()
+        {
+            int count = countProducts();//bad practice, delete this
+            String query = "ALTER TABLE Persons AUTO_INCREMENT=" + count;
+        }
+
+        public static String getProductName(int productId)
+        {
+            String name = "";
+            String query = "SELECT name FROM products WHERE productId=" + productId + ";";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception();
+            }
+
+            if (dataReader.Read())
+            {
+                name = dataReader.GetString("name");
+                dataReader.Close();
+            }
+
+            return name;
+        }
+
+        public static String getProductDetails(int productId)
+        {
+            String details = "";
+            String query = "SELECT details FROM products WHERE productId=" + productId + ";";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception();
+            }
+
+            if (dataReader.Read())
+            {
+                details = dataReader.GetString("details");
+                dataReader.Close();
+            }
+
+            return details;
+        }
+
+        public static String getProductImageURL(int productId)
+        {
+            String Image = "";
+            String query = "SELECT imageURL FROM products WHERE productId=" + productId + ";";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception();
+            }
+
+            if (dataReader.Read())
+            {
+                Image = dataReader.GetString("imageURL");
+                dataReader.Close();
+            }
+
+            return Image;
+        }
+
+        public static int getProductPrice(int productId)
+        {
+            int price = -1;
+            String query = "SELECT price FROM products WHERE productId=" + productId + ";";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception();
+            }
+
+            if (dataReader.Read())
+            {
+                price = dataReader.GetInt32("price");
+                dataReader.Close();
+            }
+
+            return price;
+        }
+
+        public static int countProducts()
+        {
+            String query = "SELECT COUNT(*) FROM products;";
+            int count = -1;
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception();
+            }
+
+            if (dataReader.Read())
+            {
+                count = dataReader.GetInt32("COUNT(*)");
+                dataReader.Close();
+            }
+
+            return count;
         }
 
         public static void changeProduct(int productId, String name, int price, String details, String imageURL)

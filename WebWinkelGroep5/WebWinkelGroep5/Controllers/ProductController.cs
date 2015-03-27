@@ -15,11 +15,36 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Index()
         {
+            int count = DatabaseController.countProducts();
+            String message = "";
+            for (int i = 0; i < count; i++ )
+            {
+                try
+                {
+                    message += "<th><a href=\"../Product/details?productId=" + i + "\"><img src=\"" + DatabaseController.getProductImageURL(i);
+                }
+                catch(Exception ex)
+                {//work with array instead of id's
+
+                }
+                try
+                {
+                    message += "\" title=\"" + DatabaseController.getProductName(i) + "\" alt=\"Sorry voor de ongemak\" style=\"width:304px;height:228px\"></th>";
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+            ViewBag.Message = message;
             return View();
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int productId)
         {
+            ViewBag.Message = "<img src=\"" + DatabaseController.getProductImageURL(productId) + "\" alt=\"Sorry voor het ongemak!\" style=\"width:304px;height:228px\"><br />";
+            ViewBag.Details = DatabaseController.getProductDetails(productId);
+            ViewBag.EditUrl = "../product/changeproduct?productId=" + productId;
             return View();
         }
 
@@ -29,12 +54,13 @@ namespace WebWinkelGroep5.Controllers
             return View();
         }
 
-        public ActionResult changeProduct()
+        public ActionResult changeProduct(int productId)
         {
+            ViewBag.ProductId = productId;
             return View();
         }
 
-        public ActionResult changeImage()
+        public ActionResult changeImage(int productId)
         {
             String newFileName = "";
 
@@ -47,26 +73,26 @@ namespace WebWinkelGroep5.Controllers
                 photo.Save(@"~/Images/" + newFileName);
                 ViewBag.Image = newFileName;
 
-                DatabaseController.changeProduct((int)Session["productId"], "", -1, "", "~/Images/" + newFileName);
+                DatabaseController.changeProduct(productId, "", -1, "", "/Images/" + newFileName);
             }
             return View();
         }
 
-        public ActionResult changeName(String name)
+        public ActionResult changeName(String name, int productId)
         {
-            DatabaseController.changeProduct((int)Session["productId"], name, -1, "", "");
+            DatabaseController.changeProduct(productId, name, -1, "", "");
             return View();
         }
 
-        public ActionResult changeDetails(String details)
+        public ActionResult changeDetails(String details, int productId)
         {
-            DatabaseController.changeProduct((int)Session["productId"], "", -1, details, "");
+            DatabaseController.changeProduct(productId, "", -1, details, "");
             return View();
         }
 
-        public ActionResult changePrice(int price)
+        public ActionResult changePrice(int price, int productId)
         {
-            DatabaseController.changeProduct((int)Session["productId"], "", price, "", "");
+            DatabaseController.changeProduct(productId, "", price, "", "");
             return View();
         }
 
@@ -76,15 +102,17 @@ namespace WebWinkelGroep5.Controllers
             String newFileName = "";
             
             WebImage photo = WebImage.GetImageFromRequest();
+            
             if (photo != null)
             {
+                
                 newFileName = Guid.NewGuid().ToString() + "_" +
-                    Path.GetFileName(photo.FileName);
+                    "img.png";
 
                 photo.Save(@"~/Images/" + newFileName);
                 ViewBag.Image = newFileName;
 
-                DatabaseController.addProduct(name, price, details, "~/Images/" + newFileName);
+                DatabaseController.addProduct(name, price, details, "/Images/" + newFileName);
             }
 
             

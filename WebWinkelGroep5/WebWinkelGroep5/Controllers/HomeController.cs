@@ -16,6 +16,11 @@ namespace WebWinkelGroep5.Controllers
             return View();
         }
 
+        public ActionResult Werknemers()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Over ons";
