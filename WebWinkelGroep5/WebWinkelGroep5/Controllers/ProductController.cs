@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Helpers;
+using WebWinkelGroep5.Models;
 
 namespace WebWinkelGroep5.Controllers
 {
@@ -15,26 +16,14 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Index()
         {
-            int count = DatabaseController.countProducts();
             String message = "";
-            for (int i = 0; i < count; i++ )
+            List<ProductModel> productList = DatabaseController.getProductList();
+            foreach (ProductModel model in productList)
             {
-                try
-                {
-                    message += "<th><a href=\"../Product/details?productId=" + i + "\"><img src=\"" + DatabaseController.getProductImageURL(i);
-                }
-                catch(Exception ex)
-                {//work with array instead of id's
+                message += "<th><a href=\"../Product/details?productId=" + model.productId + "\"><img src=\"" + model.imageURL;
 
-                }
-                try
-                {
-                    message += "\" title=\"" + DatabaseController.getProductName(i) + "\" alt=\"Sorry voor de ongemak\" style=\"width:304px;height:228px\"></th>";
-                }
-                catch(Exception ex)
-                {
+                message += "\" title=\"" + model.name + "\" alt=\"Sorry voor de ongemak\" style=\"width:304px;height:228px\"></th>";
 
-                }
             }
             ViewBag.Message = message;
             return View();

@@ -9,6 +9,7 @@ using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using MySql.Data.MySqlClient;
+using WebWinkelGroep5.Models;
 
 namespace WebWinkelGroep5.Controllers
 {
@@ -21,7 +22,7 @@ namespace WebWinkelGroep5.Controllers
         public static void initDatabaseController()
         {
             //Vul hier de juiste gegevens in!!
-            conn = new MySqlConnection("server=127.0.0.1; database=webwinkelinfc; user id=root; password=; pooling = false;");
+            conn = new MySqlConnection("server=127.0.0.1; database=webwinkel; user id=root; password=33662648; pooling = false;");
             
                 try
                 {
@@ -31,6 +32,50 @@ namespace WebWinkelGroep5.Controllers
                 {
                     throw (ex);
                 }
+        }
+
+        public static List<ProductModel> getProductList()
+        {
+            List<ProductModel> result = new List<ProductModel>();
+            String query = "SELECT * FROM products";
+            String name;
+            String details;
+            String imageURL;
+            int price;
+            int i = 0;
+            ProductModel filler = new ProductModel();
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception();
+            }
+            while(dataReader.Read())
+            {
+                filler = new ProductModel();
+                name = dataReader.GetString("name");
+                details = dataReader.GetString("details");
+                imageURL = dataReader.GetString("imageURL");
+                price = dataReader.GetInt32("price");
+                
+                filler.productId = dataReader.GetInt32("productId");
+                filler.name = name;
+                filler.details = details;
+                filler.imageURL = imageURL;
+                filler.price = price;
+                
+                result.Add(filler);
+            }
+            dataReader.Close();
+
+            return result;
         }
 
         public static bool login(String username, String password)
@@ -140,17 +185,17 @@ namespace WebWinkelGroep5.Controllers
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
-            resetAutoIncrement();
+            //resetAutoIncrement();
         }
 
         private static void resetAutoIncrement()
-        {
+        {//deprecated
             int count = countProducts();//bad practice, delete this
             String query = "ALTER TABLE Persons AUTO_INCREMENT=" + count;
         }
 
         public static String getProductName(int productId)
-        {
+        {//deprecated and buggy
             String name = "";
             String query = "SELECT name FROM products WHERE productId=" + productId + ";";
 
@@ -178,7 +223,7 @@ namespace WebWinkelGroep5.Controllers
         }
 
         public static String getProductDetails(int productId)
-        {
+        {//deprecated and buggy
             String details = "";
             String query = "SELECT details FROM products WHERE productId=" + productId + ";";
 
@@ -206,7 +251,7 @@ namespace WebWinkelGroep5.Controllers
         }
 
         public static String getProductImageURL(int productId)
-        {
+        {//deprecated and buggy
             String Image = "";
             String query = "SELECT imageURL FROM products WHERE productId=" + productId + ";";
 
@@ -234,7 +279,7 @@ namespace WebWinkelGroep5.Controllers
         }
 
         public static int getProductPrice(int productId)
-        {
+        {//deprecated and buggy
             int price = -1;
             String query = "SELECT price FROM products WHERE productId=" + productId + ";";
 
@@ -262,7 +307,7 @@ namespace WebWinkelGroep5.Controllers
         }
 
         public static int countProducts()
-        {
+        {//deprecated and buggy
             String query = "SELECT COUNT(*) FROM products;";
             int count = -1;
 
