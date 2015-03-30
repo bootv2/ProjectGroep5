@@ -35,6 +35,45 @@ namespace WebWinkelGroep5.Controllers
             return View();
         }
 
+        public ActionResult AddToWinkelmand(int productId, int amount)
+        {
+            WinkelmandItemModel item = new WinkelmandItemModel();
+            item.amount = amount;
+            item.productId = productId;
+            if(Session["Winkelmand"] == null)
+            {
+                Session["Winkelmand"] = new WinkelmandModel();
+            }
+            WinkelmandModel mand = (WinkelmandModel)Session["Winkelmand"];
+            mand.items.Add(item);
+            Session["Winkelmand"] = mand;
+            ViewBag.Message = DatabaseController.getProductName(item.productId) + " is toegevoegd aan uw winkelmand!";
+            return View();
+        }
+
+        public ActionResult ViewMand()
+        {
+            String message = "";
+            
+
+            if(Session["Winkelmand"] == null)
+            {
+                message = "Je winkelmand is nog leeg!";
+            }
+            else
+            {
+                WinkelmandModel model = (WinkelmandModel)Session["Winkelmand"];
+                List<WinkelmandItemModel> items = model.items;
+                foreach(WinkelmandItemModel item in items)
+                {
+                    message += item.amount + "x " + DatabaseController.getProductName(item.productId) + " a " + DatabaseController.getProductPrice(item.productId) * item.amount + "<br>";
+                }
+            }
+
+            ViewBag.Message = message;
+            return View();
+        }
+
         public ActionResult Winkelwagen()
         {
             try

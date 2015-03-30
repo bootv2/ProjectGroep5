@@ -32,6 +32,7 @@ namespace WebWinkelGroep5.Controllers
         public ActionResult Details(int productId)
         {
             ViewBag.Message = "<img src=\"" + DatabaseController.getProductImageURL(productId) + "\" alt=\"Sorry voor het ongemak!\" style=\"width:304px;height:228px\"><br />";
+            ViewBag.AddToCartURL = "<a href='../Winkelmand/AddToWinkelmand?productId=" + productId + "&amount=1' >Stop in winkelmand</a>";
             ViewBag.Details = DatabaseController.getProductDetails(productId);
             ViewBag.EditUrl = "../product/changeproduct?productId=" + productId;
             return View();
