@@ -30,6 +30,7 @@ namespace WebWinkelGroep5.Controllers
                 }
                 catch (MySqlException ex)
                 {
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
                     throw (ex);
                 }
         }
@@ -55,6 +56,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
             while(dataReader.Read())
@@ -93,6 +95,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch(MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
 
@@ -107,6 +110,34 @@ namespace WebWinkelGroep5.Controllers
                 return true;
             else
                 return false;
+        }
+
+        public static void setBestellingCount(int count)
+        {
+            String query = "UPDATE bestellingcounter SET count=" + count + " WHERE count=" + (count - 1);
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+        }
+
+        public static void addBestellingLine(int bestellingId, int productId, int amount)
+        {
+            String query = "INSERT INTO bestelling(bestellingId, productId, amount) VALUES(" + bestellingId + ", " + productId + ", " + amount + ");";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
         }
 
         public static int getBestellingCount()
@@ -124,6 +155,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
 
@@ -151,6 +183,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
 
@@ -194,6 +227,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch(MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 return false;
             }
             return true;
@@ -237,6 +271,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
 
@@ -265,6 +300,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
 
@@ -293,6 +329,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
 
@@ -321,6 +358,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
 
@@ -349,6 +387,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
 

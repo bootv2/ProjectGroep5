@@ -22,9 +22,14 @@ namespace WebWinkelGroep5.Controllers
         {
             bestelling = new BestellingModel();
             bestelling.fromWinkelmandModel((WinkelmandModel)Session["Winkelmand"]);
+            int bestellingId = DatabaseController.getBestellingCount() + 1;
+            foreach(WinkelmandItemModel m in bestelling.items)
+            {
+                DatabaseController.addBestellingLine(bestellingId, m.productId, m.amount);
+            }
+            DatabaseController.setBestellingCount(bestellingId);
 
-
-            return View();
+            return View(bestelling);
         }
 
     }

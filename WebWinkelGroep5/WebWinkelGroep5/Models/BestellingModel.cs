@@ -15,7 +15,8 @@ namespace WebWinkelGroep5.Models
 
         public void fromWinkelmandModel(WinkelmandModel model)
         {
-            items = model.items;
+            if(items != null)
+                items = model.items;
         }
 
         public List<WinkelmandItemModel> items{get;set;}
