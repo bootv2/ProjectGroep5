@@ -108,6 +108,8 @@ namespace WebWinkelGroep5.Controllers
             else
                 return false;
         }
+
+        public 
         public static bool isAdmin(String username)
         {
             int status;

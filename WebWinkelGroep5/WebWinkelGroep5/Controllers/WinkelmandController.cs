@@ -18,20 +18,26 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Index()
         {
-            //ArrayList mandList = (ArrayList) Session["Winkelmand"];
-            ViewBag.Message = "test";
-            return View();
-        }
+            String message = "";
 
-        public ActionResult WinkelmandLeeg()
-        {
-            ViewBag.Message = "De winkelwagen is op het moment leeg! Klik de + bij een product om dit product aan de winkelwagen toe te voegen!";
-            return View();
-        }
 
-        public ActionResult Winkelmand()
-        {
-            ViewBag.Message = "De volgende producten zitten in de winkelmand";
+            if (Session["Winkelmand"] == null)
+            {
+                message = "Je winkelmand is nog leeg!";
+            }
+            else
+            {
+                WinkelmandModel model = (WinkelmandModel)Session["Winkelmand"];
+                List<WinkelmandItemModel> items = model.items;
+                foreach (WinkelmandItemModel item in items)
+                {
+                    message += item.amount + "x " + DatabaseController.getProductName(item.productId) + " a " + DatabaseController.getProductPrice(item.productId) * item.amount + "<br>";
+                }
+                message += "<br><br><a href='../Bestelling/MaakBestelling'>Plaats Bestelling</a>";
+            }
+
+
+            ViewBag.Message = message;
             return View();
         }
 

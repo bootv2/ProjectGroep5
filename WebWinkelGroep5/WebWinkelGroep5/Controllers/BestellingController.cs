@@ -23,6 +23,7 @@ namespace WebWinkelGroep5.Controllers
             bestelling = new BestellingModel();
             bestelling.fromWinkelmandModel((WinkelmandModel)Session["Winkelmand"]);
 
+
             return View();
         }
 

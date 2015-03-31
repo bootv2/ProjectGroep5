@@ -7,6 +7,7 @@ namespace WebWinkelGroep5.Models
 {
     public class BestellingModel
     {
+        int bestellingId = -1;
         public BestellingModel()
         {
             items = new List<WinkelmandItemModel>();

@@ -186,6 +186,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DatabaseController.cs" />
+    <Compile Include="Controllers\BestellingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SendMailerController.cs" />
@@ -193,8 +194,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Bestelling.cs" />
+    <Compile Include="Models\BestellingModel.cs" />
     <Compile Include="Models\MailModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\WinkelmandItemModel.cs" />
+    <Compile Include="Models\WinkelmandModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -346,7 +350,6 @@
     <Content Include="Views\Winkelmand\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
-    <Content Include="Views\Winkelmand\WinkelmandLeeg.cshtml" />
     <Content Include="Views\Product\Upload.cshtml" />
     <Content Include="Views\Home\Disclaimer.cshtml" />
     <Content Include="Views\Home\TOS.cshtml" />
@@ -361,6 +364,10 @@
     <Content Include="Views\Admin\ChangeUserStatus.cshtml" />
     <Content Include="Views\Admin\ManageUser.cshtml" />
     <Content Include="Views\Home\Werknemers.cshtml" />
+    <Content Include="Views\Winkelmand\AddToWinkelmand.cshtml" />
+    <Content Include="Views\Winkelmand\ViewMand.cshtml" />
+    <Content Include="Views\Bestelling\MaakBestelling.cshtml" />
+    <Content Include="Views\Bestelling\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
