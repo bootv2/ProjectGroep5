@@ -18,27 +18,13 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Index()
         {
-            String message = "";
+            WinkelmandModel model = null;
 
-
-            if (Session["Winkelmand"] == null)
+            if (Session["Winkelmand"] != null)
             {
-                message = "Je winkelmand is nog leeg!";
+                model = (WinkelmandModel)Session["Winkelmand"];
             }
-            else
-            {
-                WinkelmandModel model = (WinkelmandModel)Session["Winkelmand"];
-                List<WinkelmandItemModel> items = model.items;
-                foreach (WinkelmandItemModel item in items)
-                {
-                    message += item.amount + "x " + DatabaseController.getProductName(item.productId) + " a " + DatabaseController.getProductPrice(item.productId) * item.amount + "<br>";
-                }
-                message += "<br><br><a href='../Bestelling/MaakBestelling'>Plaats Bestelling</a>";
-            }
-
-
-            ViewBag.Message = message;
-            return View();
+            return View(model);
         }
 
         public ActionResult AddToWinkelmand(int productId, int amount)
@@ -72,27 +58,13 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult ViewMand()
         {
-            String message = "";
-            
+            WinkelmandModel model = null;
 
-            if(Session["Winkelmand"] == null)
+            if(Session["Winkelmand"] != null)
             {
-                message = "Je winkelmand is nog leeg!";
+                model = (WinkelmandModel)Session["Winkelmand"];
             }
-            else
-            {
-                WinkelmandModel model = (WinkelmandModel)Session["Winkelmand"];
-                List<WinkelmandItemModel> items = model.items;
-                foreach(WinkelmandItemModel item in items)
-                {
-                    message += item.amount + "x " + DatabaseController.getProductName(item.productId) + " a " + DatabaseController.getProductPrice(item.productId) * item.amount + "<br>";
-                }
-                message += "<br><br><a href='../Bestelling/MaakBestelling'>Plaats Bestelling</a>";
-            }
-            
-
-            ViewBag.Message = message;
-            return View();
+            return View(model);
         }
 
         public ActionResult Winkelwagen()

@@ -109,7 +109,32 @@ namespace WebWinkelGroep5.Controllers
                 return false;
         }
 
-        public 
+        public static int getBestellingCount()
+        {
+            int result = -1;
+            String query = "SELECT count FROM bestellingcounter";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception();
+            }
+
+            if (dataReader.Read())
+            {
+                result = dataReader.GetInt32("count");
+                dataReader.Close();
+            }
+
+            return result;
+        }
         public static bool isAdmin(String username)
         {
             int status;

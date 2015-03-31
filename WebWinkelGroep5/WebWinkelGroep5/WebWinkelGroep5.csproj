@@ -196,6 +196,7 @@
     </Compile>
     <Compile Include="Models\BestellingModel.cs" />
     <Compile Include="Models\MailModel.cs" />
+    <Compile Include="Models\ProductListModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\WinkelmandItemModel.cs" />
     <Compile Include="Models\WinkelmandModel.cs" />

@@ -16,26 +16,20 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Index()
         {
-            String message = "";
             List<ProductModel> productList = DatabaseController.getProductList();
-            foreach (ProductModel model in productList)
-            {
-                message += "<th><a href=\"../Product/details?productId=" + model.productId + "\"><img src=\"" + model.imageURL;
-
-                message += "\" title=\"" + model.name + "\" alt=\"Sorry voor de ongemak\" style=\"width:304px;height:228px\"></th>";
-
-            }
-            ViewBag.Message = message;
-            return View();
+            ProductListModel model = new ProductListModel();
+            model.productList = productList;
+            return View(model);
         }
 
         public ActionResult Details(int productId)
         {
-            ViewBag.Message = "<img src=\"" + DatabaseController.getProductImageURL(productId) + "\" alt=\"Sorry voor het ongemak!\" style=\"width:304px;height:228px\"><br />";
-            ViewBag.AddToCartURL = "<a href='../Winkelmand/AddToWinkelmand?productId=" + productId + "&amount=1' >Stop in winkelmand</a>";
-            ViewBag.Details = DatabaseController.getProductDetails(productId);
-            ViewBag.EditUrl = "../product/changeproduct?productId=" + productId;
-            return View();
+            ProductModel model = new ProductModel();
+            model.productId = productId;
+            model.imageURL = DatabaseController.getProductImageURL(productId);
+            model.details = DatabaseController.getProductDetails(productId);
+            model.name = DatabaseController.getProductName(productId);
+            return View(model);
         }
 
         public ActionResult NewProduct()
@@ -53,7 +47,8 @@ namespace WebWinkelGroep5.Controllers
         public ActionResult changeImage(int productId)
         {
             String newFileName = "";
-
+            ProductModel model = new ProductModel();
+            model.productId = productId;
             WebImage photo = WebImage.GetImageFromRequest();
             if (photo != null)
             {
@@ -65,25 +60,31 @@ namespace WebWinkelGroep5.Controllers
 
                 DatabaseController.changeProduct(productId, "", -1, "", "/Images/" + newFileName);
             }
-            return View();
+            return View(model);
         }
 
         public ActionResult changeName(String name, int productId)
         {
+            ProductModel model = new ProductModel();
+            model.productId = productId;
             DatabaseController.changeProduct(productId, name, -1, "", "");
-            return View();
+            return View(model);
         }
 
         public ActionResult changeDetails(String details, int productId)
         {
+            ProductModel model = new ProductModel();
+            model.productId = productId;
             DatabaseController.changeProduct(productId, "", -1, details, "");
-            return View();
+            return View(model);
         }
 
         public ActionResult changePrice(int price, int productId)
         {
+            ProductModel model = new ProductModel();
+            model.productId = productId;
             DatabaseController.changeProduct(productId, "", price, "", "");
-            return View();
+            return View(model);
         }
 
         [HttpPost]
