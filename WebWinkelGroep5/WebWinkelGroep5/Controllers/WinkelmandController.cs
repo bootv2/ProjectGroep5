@@ -40,12 +40,25 @@ namespace WebWinkelGroep5.Controllers
             WinkelmandItemModel item = new WinkelmandItemModel();
             item.amount = amount;
             item.productId = productId;
+            bool addItem = false;
             if(Session["Winkelmand"] == null)
             {
                 Session["Winkelmand"] = new WinkelmandModel();
             }
             WinkelmandModel mand = (WinkelmandModel)Session["Winkelmand"];
-            mand.items.Add(item);
+            if (mand.items.Count > 0)
+            {
+                foreach (WinkelmandItemModel mandItem in mand.items)
+                {
+                    if (mandItem.productId == item.productId)
+                    {
+                        mandItem.amount += item.amount;
+                    }
+                    else addItem = true;
+                }
+            }
+            else addItem = true;
+            if(addItem) mand.items.Add(item);
             Session["Winkelmand"] = mand;
             ViewBag.Message = DatabaseController.getProductName(item.productId) + " is toegevoegd aan uw winkelmand!";
             return View();
@@ -68,7 +81,9 @@ namespace WebWinkelGroep5.Controllers
                 {
                     message += item.amount + "x " + DatabaseController.getProductName(item.productId) + " a " + DatabaseController.getProductPrice(item.productId) * item.amount + "<br>";
                 }
+                message += "<br><br><a href='../Bestelling/MaakBestelling'>Plaats Bestelling</a>";
             }
+            
 
             ViewBag.Message = message;
             return View();
@@ -78,14 +93,14 @@ namespace WebWinkelGroep5.Controllers
         {
             try
             {
-                Bestelling bestelling = new Bestelling();
+                BestellingModel bestelling = new BestellingModel();
                 /*List<Bestelling> bestellingen = DatabaseController.GetWinkelwagen(userId);
                 bestelling.lijst = bestellingen;*/
                 return View(bestelling);
             }
             catch (Exception e)
             {
-                ViewBag.Message = "Er is een fout opgetreden" + e;
+                ViewBag.Message = "Er is een fout opgetreden: " + e;
                 return View();
             }
 
