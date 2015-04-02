@@ -1,6 +1,70 @@
-﻿@{
+﻿@model WebWinkelGroep5.Models.BestellingModel
+@{
     ViewBag.Title = "MaakBestelling";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>MaakBestelling</h2>
+@{
+    if (Model != null)
+    {
+        List<WebWinkelGroep5.Models.WinkelmandItemModel> items = Model.items;
+        foreach (WebWinkelGroep5.Models.WinkelmandItemModel item in items)
+        {
+            <h3>@(item.amount)x @WebWinkelGroep5.Controllers.DatabaseController.getProductName(item.productId) a @(WebWinkelGroep5.Controllers.DatabaseController.getProductPrice(item.productId) * item.amount)</h3>
+        }
+    }
+    }
+
+<h2 align="center"> Contactgegevens</h2>
+<form action="../Bestelling/setGegevens" method="post">
+    Bedrijfsnaam
+            <input id="bedrijfsnaam" type="text">
+        
+        
+            Voornaam
+            <input id="voornaam" type="text">
+        
+
+        
+            Achternaam
+            <input id="naam" type="text">
+        
+
+        
+            Adres
+            <input id="adres" type="text">
+        
+
+        
+            Postcode
+            <input id="postcode" type="text">
+        
+
+        
+            Land
+            <input id="land" type="text">
+        
+
+        
+            Nummer
+            <input id="tel" type="text">
+        
+            Stad
+            <input id="stad" type="text" />
+            <input id="userid" type="hidden" value="@Model.userId"> 
+        
+
+        
+            <input value="Verstuur" type="submit"/>
+            
+                <input type="radio" id="man" name="sex" value="male" checked>ja
+                <input type="radio" name="sex" value="female">nee
+
+                <br>Wilt u een bevestiging?
+            
+        
+
+
+</form>

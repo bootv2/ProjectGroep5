@@ -112,9 +112,9 @@ namespace WebWinkelGroep5.Controllers
                 return false;
         }
 
-        public static void setBestellingCount(int count)
+        public static void addBestellingLine(int bestellingId, int productId, int amount, int userId)
         {
-            String query = "UPDATE bestellingcounter SET count=" + count + " WHERE count=" + (count - 1);
+            String query = "INSERT INTO bestelling(bestellingId, productId, amount, userId) VALUES(" + bestellingId + ", " + productId + ", " + amount + ", " + userId + ");";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             try
             {
@@ -126,24 +126,10 @@ namespace WebWinkelGroep5.Controllers
             }
         }
 
-        public static void addBestellingLine(int bestellingId, int productId, int amount)
-        {
-            String query = "INSERT INTO bestelling(bestellingId, productId, amount) VALUES(" + bestellingId + ", " + productId + ", " + amount + ");";
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-        }
-
-        public static int getBestellingCount()
+        public static int getUserId(String username)
         {
             int result = -1;
-            String query = "SELECT count FROM bestellingcounter";
+            String query = "SELECT userId FROM users WHERE username='" + username + "'";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataReader dataReader;
@@ -161,11 +147,62 @@ namespace WebWinkelGroep5.Controllers
 
             if (dataReader.Read())
             {
-                result = dataReader.GetInt32("count");
+                result = dataReader.GetInt32("userId");
                 dataReader.Close();
             }
 
             return result;
+        }
+
+        public static int getNextBestellingId()
+        {
+            int result = -1;
+            String query = "SELECT MAX(bestellingId) AS biggestid FROM bestelling";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                throw new Exception();
+            }
+
+            if (dataReader.Read())
+            {
+                try
+                {
+                    result = dataReader.GetInt32("biggestid");
+                    
+                }
+                catch (System.Data.SqlTypes.SqlNullValueException ex)
+                {
+                    result = -1;
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                }
+                dataReader.Close();
+                result++;
+            }
+
+            return result;
+        }
+        public static void setUserDetails(String fullname, String address, String city, String zip, String tel, String username)
+        {
+            String query = "UPDATE users SET address=" + address + ", city=" + city + ", zip=" + zip + ", phoneNumber=" + tel + ", fullname=" + fullname + " WHERE username='" + username + "';";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
         }
         public static bool isAdmin(String username)
         {

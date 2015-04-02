@@ -19,5 +19,10 @@
     <ul>
         <li><a href="~/Account/RegisterPage">Register</a></li>
         <a href="~/Account/Logoff">Log off</a>
-        <li><a href="~/Account/LoginPage">Log In</a></li>
+        <li>
+            <form action="~/Account/LoginPage" method="post" onsubmit="document.getElementById('thisurl').value = document.URL;">
+                <input name="thisurl" id="thisurl" type="hidden" />
+                <input type="submit" value="Log In!" />
+            </form>
+</li>
     </ul>

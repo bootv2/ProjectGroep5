@@ -21,16 +21,26 @@ namespace WebWinkelGroep5.Controllers
         public ActionResult MaakBestelling()
         {
             bestelling = new BestellingModel();
+            bestelling.userId = DatabaseController.getUserId((String)Session["Username"]);
             bestelling.fromWinkelmandModel((WinkelmandModel)Session["Winkelmand"]);
-            int bestellingId = DatabaseController.getBestellingCount() + 1;
+            int bestellingId = DatabaseController.getNextBestellingId();
             foreach(WinkelmandItemModel m in bestelling.items)
             {
-                DatabaseController.addBestellingLine(bestellingId, m.productId, m.amount);
+                DatabaseController.addBestellingLine(bestellingId, m.productId, m.amount, bestelling.userId);
             }
-            DatabaseController.setBestellingCount(bestellingId);
 
             return View(bestelling);
         }
+
+        public ActionResult setGegevens(String bedrijfsnaam, String voornaam, String naam, String adres, String postcode, String land, String stad, String tel)
+        {
+
+            DatabaseController.setUserDetails(voornaam + " " + naam, adres, stad, postcode, tel, (String)Session["Username"]);
+
+            
+            return View();
+        }
+
 
     }
 }

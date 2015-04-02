@@ -369,6 +369,7 @@
     <Content Include="Views\Winkelmand\ViewMand.cshtml" />
     <Content Include="Views\Bestelling\MaakBestelling.cshtml" />
     <Content Include="Views\Bestelling\Index.cshtml" />
+    <Content Include="Views\Bestelling\SetGegevens.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

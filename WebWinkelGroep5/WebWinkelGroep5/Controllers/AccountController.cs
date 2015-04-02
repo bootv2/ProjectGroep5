@@ -8,9 +8,9 @@ namespace WebWinkelGroep5.Controllers
 {
     public class AccountController : Controller
     {
-        public ActionResult LoginPage()
+        public ActionResult LoginPage(String thisurl)
         {
-
+            ViewBag.url = thisurl;
             return View();
         }
         //
