@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "showNewBestelling";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Uw nieuwe bestelling:</h2>
+@{
+    if (Model != null)
+    {
+        List<WebWinkelGroep5.Models.WinkelmandItemModel> items = Model.items;
+        foreach (WebWinkelGroep5.Models.WinkelmandItemModel item in items)
+        {
+            <h3>@(item.amount)x @WebWinkelGroep5.Controllers.DatabaseController.getProductName(item.productId) a @(WebWinkelGroep5.Controllers.DatabaseController.getProductPrice(item.productId) * item.amount)</h3>
+        }
+    }
+}

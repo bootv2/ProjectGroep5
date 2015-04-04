@@ -24,6 +24,8 @@ namespace WebWinkelGroep5.Controllers
             bestelling.userId = DatabaseController.getUserId((String)Session["Username"]);
             bestelling.fromWinkelmandModel((WinkelmandModel)Session["Winkelmand"]);
             int bestellingId = DatabaseController.getNextBestellingId();
+            bestelling.bestellingId = bestellingId;
+            Session["BestellingId"] = bestellingId;
             foreach(WinkelmandItemModel m in bestelling.items)
             {
                 DatabaseController.addBestellingLine(bestellingId, m.productId, m.amount, bestelling.userId);
@@ -37,8 +39,9 @@ namespace WebWinkelGroep5.Controllers
 
             DatabaseController.setUserDetails(voornaam + " " + naam, adres, stad, postcode, tel, (String)Session["Username"]);
 
-            
-            return View();
+            bestelling.items = DatabaseController.getBestelling((int)Session["BestellingId"]);
+
+            return View(bestelling);
         }
 
 

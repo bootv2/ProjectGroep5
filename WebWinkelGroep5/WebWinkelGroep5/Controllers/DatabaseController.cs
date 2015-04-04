@@ -35,6 +35,41 @@ namespace WebWinkelGroep5.Controllers
                 }
         }
 
+        public static List<WinkelmandItemModel> getBestelling(int bestellingId)
+        {
+            List<WinkelmandItemModel> result = new List<WinkelmandItemModel>();
+            WinkelmandItemModel dummy;
+            String query = "SELECT * FROM bestelling WHERE bestellingId=" + bestellingId;
+            int productId = -1;
+            int amount = -1;
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                throw new Exception();
+            }
+            while (dataReader.Read())
+            {
+                dummy = new WinkelmandItemModel();
+                productId = dataReader.GetInt32("productId");
+                amount = dataReader.GetInt32("amount");
+                dummy.amount = amount;
+                dummy.productId = productId;
+                result.Add(dummy);
+            }
+            dataReader.Close();
+
+            return result;
+        }
+
         public static List<ProductModel> getProductList()
         {
             List<ProductModel> result = new List<ProductModel>();
@@ -187,7 +222,6 @@ namespace WebWinkelGroep5.Controllers
                 }
                 catch (System.Data.SqlTypes.SqlNullValueException ex)
                 {
-                    result = -1;
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
                 }
                 dataReader.Close();
@@ -196,9 +230,46 @@ namespace WebWinkelGroep5.Controllers
 
             return result;
         }
+
+        public static int getHighestBestellingId()
+        {
+            int result = -1;
+            String query = "SELECT MAX(bestellingId) AS biggestid FROM bestelling";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                throw new Exception();
+            }
+
+            if (dataReader.Read())
+            {
+                try
+                {
+                    result = dataReader.GetInt32("biggestid");
+
+                }
+                catch (System.Data.SqlTypes.SqlNullValueException ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                }
+                dataReader.Close();
+            }
+
+            return result;
+        }
+
         public static void setUserDetails(String fullname, String address, String city, String zip, String tel, String username)
         {
-            String query = "UPDATE users SET address=" + address + ", city=" + city + ", zip=" + zip + ", phoneNumber=" + tel + ", fullname=" + fullname + " WHERE username='" + username + "';";
+            String query = "UPDATE users SET address='" + address + "', city='" + city + "', zip='" + zip + "', phoneNumber='" + tel + "', fullname='" + fullname + "' WHERE username='" + username + "';";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             try
             {
