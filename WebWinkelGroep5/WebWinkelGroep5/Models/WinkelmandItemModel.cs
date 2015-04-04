@@ -9,5 +9,7 @@ namespace WebWinkelGroep5.Models
     {
         public int productId { get; set; }
         public int amount { get; set; }
+        public String name { get; set; }
+        public int price { get; set; }
     }
 }

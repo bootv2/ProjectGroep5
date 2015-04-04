@@ -43,7 +43,6 @@ namespace WebWinkelGroep5.Controllers
             String details;
             String imageURL;
             int price;
-            int i = 0;
             ProductModel filler = new ProductModel();
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -104,7 +103,11 @@ namespace WebWinkelGroep5.Controllers
                 pw = dataReader.GetString("password");
                 dataReader.Close();
             }
-            else return false;
+            else
+            {
+                dataReader.Close();
+                return false;
+            }
 
             if (pw.CompareTo(password) == 0)
                 return true;
@@ -141,6 +144,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (MySqlException ex)
             {
+
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
@@ -150,6 +154,7 @@ namespace WebWinkelGroep5.Controllers
                 result = dataReader.GetInt32("userId");
                 dataReader.Close();
             }
+            else dataReader.Close();
 
             return result;
         }
@@ -229,7 +234,11 @@ namespace WebWinkelGroep5.Controllers
                 status = dataReader.GetInt32("adminStatus");
                 dataReader.Close();
             }
-            else return false;
+            else
+            {
+                dataReader.Close();
+                return false;
+            }
 
             if (status > 0)
                 return true;
@@ -317,6 +326,7 @@ namespace WebWinkelGroep5.Controllers
                 name = dataReader.GetString("name");
                 dataReader.Close();
             }
+            else dataReader.Close();
 
             return name;
         }
@@ -346,6 +356,7 @@ namespace WebWinkelGroep5.Controllers
                 details = dataReader.GetString("details");
                 dataReader.Close();
             }
+            else dataReader.Close();
 
             return details;
         }
@@ -375,6 +386,7 @@ namespace WebWinkelGroep5.Controllers
                 Image = dataReader.GetString("imageURL");
                 dataReader.Close();
             }
+            else dataReader.Close();
 
             return Image;
         }
@@ -404,6 +416,7 @@ namespace WebWinkelGroep5.Controllers
                 price = dataReader.GetInt32("price");
                 dataReader.Close();
             }
+            else dataReader.Close();
 
             return price;
         }
@@ -433,6 +446,7 @@ namespace WebWinkelGroep5.Controllers
                 count = dataReader.GetInt32("COUNT(*)");
                 dataReader.Close();
             }
+            else dataReader.Close();
 
             return count;
         }

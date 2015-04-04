@@ -12,7 +12,7 @@
         List<WebWinkelGroep5.Models.WinkelmandItemModel> items = Model.items;
         foreach (WebWinkelGroep5.Models.WinkelmandItemModel item in items)
         {
-            <h3>@(item.amount)x @WebWinkelGroep5.Controllers.DatabaseController.getProductName(item.productId) a @(WebWinkelGroep5.Controllers.DatabaseController.getProductPrice(item.productId) * item.amount)</h3>
+            <h3>@(item.amount)x @item.name a @item.price</h3>
         }
     }
     else

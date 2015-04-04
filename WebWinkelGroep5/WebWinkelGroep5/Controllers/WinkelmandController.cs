@@ -32,6 +32,8 @@ namespace WebWinkelGroep5.Controllers
             WinkelmandItemModel item = new WinkelmandItemModel();
             item.amount = amount;
             item.productId = productId;
+            item.name = DatabaseController.getProductName(productId);
+            item.price = DatabaseController.getProductPrice(productId) * amount;
             bool addItem = false;
             if(Session["Winkelmand"] == null)
             {
