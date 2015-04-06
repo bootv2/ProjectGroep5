@@ -1,14 +1,14 @@
 ﻿@model WebWinkelGroep5.Models.AccountModel
 @{
-    ViewBag.Title = "Log in";
-}
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
+    <h1>Log in.</h1>
 </hgroup>
 
 <section id="loginForm">
-<h2>@ViewBag.Message</h2>
+<h2>@Model.loginMessage</h2>
     <br />
     <a href="@Model.lastUrl">Klik hier om terug te gaan naar de laatste pagina!</a>
     </section>

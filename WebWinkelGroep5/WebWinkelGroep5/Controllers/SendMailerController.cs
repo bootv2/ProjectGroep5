@@ -71,7 +71,6 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Contact";
 
             return View();
         }

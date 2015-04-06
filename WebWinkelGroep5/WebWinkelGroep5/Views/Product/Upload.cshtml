@@ -1,5 +1,5 @@
-﻿@{
-    ViewBag.Title = "ImageUpload";
+﻿@model WebWinkelGroep5.Models.ProductModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <form action="~/Product/Upload" method="post" enctype="multipart/form-data">
@@ -18,10 +18,10 @@
     </fieldset>
 </form>
 <h1>Uploaded Image</h1>
-@if (ViewBag.Image != "" && ViewBag.Image != null)
+@if (@Model.imageURL != "" && @Model.imageURL != null)
 {
     <div class="result">
-        <img src="~/Images/@ViewBag.Image" alt="image" />
+        <img src="~/Images/@Model.imageURL" alt="image" />
 
     </div>
 }

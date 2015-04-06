@@ -1,6 +1,5 @@
 ﻿@model WebWinkelGroep5.Models.ProductModel
 @{
-    ViewBag.Title = "ImageUpload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1>Image changed!</h1>
@@ -42,10 +41,10 @@
     </fieldset>
 </form>
 <h1>Uploaded Image</h1>
-@if (ViewBag.Image != "" && ViewBag.Image != null)
+@if (Model.imageURL != "" && Model.imageURL != null)
 {
     <div class="result">
-        <img src="~/Images/@ViewBag.Image" alt="image" />
+        <img src="~/Images/@Model.imageURL" alt="image" />
 
     </div>
 }

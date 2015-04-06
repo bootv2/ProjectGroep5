@@ -20,20 +20,21 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Login(String username, String password, String redirect)
         {
+            AccountModel model = new AccountModel();
+            model.lastUrl = redirect;
             if(DatabaseController.login(username, password))
                 {
-                    ViewBag.message = username + " Logged In!";
+                    model.loginMessage = username + " Logged In!";
 
                     Session["Username"] = username;
                     Session["isAdmin"] = DatabaseController.isAdmin(username);
                 }
 
             else
-                { 
-                    ViewBag.message = "Username or password wrong!";
+                {
+                    model.loginMessage = "Username or password wrong!";
                 }
-            AccountModel model = new AccountModel();
-            model.lastUrl = redirect;
+            
             return View(model);
         }
 
@@ -44,15 +45,14 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult Register(String username, String password, String email)
         {
+            AccountModel model = new AccountModel();
             if (DatabaseController.register(username, password, email))
             {
-                ViewBag.Head = "Success!";
-                ViewBag.message = username + " successfully registered";
+                model.loginMessage = username + " successfully registered";
             }
             else
             {
-                ViewBag.Head = "Error!";
-                ViewBag.message = "Username or email already in use.";
+                model.loginMessage = "Username or email already in use.";
             }
             return View();
         }

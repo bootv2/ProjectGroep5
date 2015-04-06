@@ -54,8 +54,7 @@ namespace WebWinkelGroep5.Controllers
             else addItem = true;
             if(addItem) mand.items.Add(item);
             Session["Winkelmand"] = mand;
-            ViewBag.Message = DatabaseController.getProductName(item.productId) + " is toegevoegd aan uw winkelmand!";
-            return View();
+            return View(item);
         }
 
         public ActionResult ViewMand()
@@ -80,7 +79,7 @@ namespace WebWinkelGroep5.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.Message = "Er is een fout opgetreden: " + e;
+                System.Diagnostics.Debug.WriteLine(e.ToString());
                 return View();
             }
 

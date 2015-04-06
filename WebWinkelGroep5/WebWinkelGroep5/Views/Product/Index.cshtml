@@ -1,12 +1,10 @@
 ﻿@model WebWinkelGroep5.Models.ProductListModel
 
 @{
-    ViewBag.Title = "Producten";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Producten</h2>
-<!--@Html.Raw(ViewBag.Message)-->
 @{
     foreach (WebWinkelGroep5.Models.ProductModel m in Model.productList)
     {

@@ -40,8 +40,9 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult changeProduct(int productId)
         {
-            ViewBag.ProductId = productId;
-            return View();
+            ProductModel model = new ProductModel();
+            model.productId = productId;
+            return View(model);
         }
 
         public ActionResult changeImage(int productId)
@@ -49,6 +50,7 @@ namespace WebWinkelGroep5.Controllers
             String newFileName = "";
             ProductModel model = new ProductModel();
             model.productId = productId;
+            
             WebImage photo = WebImage.GetImageFromRequest();
             if (photo != null)
             {
@@ -56,7 +58,7 @@ namespace WebWinkelGroep5.Controllers
                     Path.GetFileName(photo.FileName);
 
                 photo.Save(@"~/Images/" + newFileName);
-                ViewBag.Image = newFileName;
+                model.imageURL = newFileName;
 
                 DatabaseController.changeProduct(productId, "", -1, "", "/Images/" + newFileName);
             }
@@ -91,6 +93,7 @@ namespace WebWinkelGroep5.Controllers
         public ActionResult Upload(String name, int price, String details)
         {
             String newFileName = "";
+            ProductModel model = new ProductModel();
             
             WebImage photo = WebImage.GetImageFromRequest();
             
@@ -101,14 +104,14 @@ namespace WebWinkelGroep5.Controllers
                     "img.png";
 
                 photo.Save(@"~/Images/" + newFileName);
-                ViewBag.Image = newFileName;
+                model.imageURL = newFileName;
 
                 DatabaseController.addProduct(name, price, details, "/Images/" + newFileName);
             }
 
             
 
-            return View();
+            return View(model);
         }
 
 

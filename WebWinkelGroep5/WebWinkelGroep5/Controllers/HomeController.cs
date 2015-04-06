@@ -11,7 +11,6 @@ namespace WebWinkelGroep5.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "De beste keuze voor natuurlijke producten!";
 
             return View();
         }
@@ -23,7 +22,6 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Over ons";
 
             return View();
         }
