@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebWinkelGroep5.Models;
+using System.Net.Mail;
 
 namespace WebWinkelGroep5.Controllers
 {
@@ -17,6 +18,32 @@ namespace WebWinkelGroep5.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        private void SendMail(WebWinkelGroep5.Models.MailModel _objModelMail)
+        {
+            if (ModelState.IsValid)
+            {
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.Host = "smtp.googlemail.com";
+                smtpClient.Port = 587;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new System.Net.NetworkCredential("wooods-info@compuboot.in", "Wooods123");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
+
+                //Setting From , To and CC
+                mail.To.Add(_objModelMail.To);
+                mail.From = new MailAddress("wooods-info@compuboot.in");
+                mail.Subject = _objModelMail.Subject;
+                string Body = _objModelMail.Body;
+                mail.Body = mail.From + "<br><br>" + Body;
+                mail.IsBodyHtml = true;
+                smtpClient.Send(mail);
+            }
+        }
+
 
         public ActionResult MaakBestelling()
         {

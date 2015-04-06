@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
@@ -22,17 +24,17 @@ namespace WebWinkelGroep5.Controllers
         public static void initDatabaseController()
         {
             //Vul hier de juiste gegevens in!!
-            conn = new MySqlConnection("server=127.0.0.1; database=webwinkel; user id=root; password=33662648; pooling = false;");
-            
-                try
-                {
-                    conn.Open();
-                }
-                catch (MySqlException ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(ex.ToString());
-                    throw (ex);
-                }
+            conn = new MySqlConnection("server=127.0.0.1; database=webwinkelinfc; user id=root; password=; pooling = false;");
+
+            try
+            {
+                conn.Open();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                throw (ex);
+            }
         }
 
         public static List<WinkelmandItemModel> getBestelling(int bestellingId)
@@ -93,20 +95,20 @@ namespace WebWinkelGroep5.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
             }
-            while(dataReader.Read())
+            while (dataReader.Read())
             {
                 filler = new ProductModel();
                 name = dataReader.GetString("name");
                 details = dataReader.GetString("details");
                 imageURL = dataReader.GetString("imageURL");
                 price = dataReader.GetInt32("price");
-                
+
                 filler.productId = dataReader.GetInt32("productId");
                 filler.name = name;
                 filler.details = details;
                 filler.imageURL = imageURL;
                 filler.price = price;
-                
+
                 result.Add(filler);
             }
             dataReader.Close();
@@ -127,7 +129,7 @@ namespace WebWinkelGroep5.Controllers
                 //Create a data reader and Execute the command
                 dataReader = cmd.ExecuteReader();
             }
-            catch(MySqlException ex)
+            catch (MySqlException ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw new Exception();
@@ -218,7 +220,7 @@ namespace WebWinkelGroep5.Controllers
                 try
                 {
                     result = dataReader.GetInt32("biggestid");
-                    
+
                 }
                 catch (System.Data.SqlTypes.SqlNullValueException ex)
                 {
@@ -329,12 +331,12 @@ namespace WebWinkelGroep5.Controllers
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
-            
+
         }
 
         public static bool register(String username, String password, String email)
         {
-            String query = "INSERT INTO users(username, password, email) VALUES('" + username +"', '" + password +"', '" + email +"');";
+            String query = "INSERT INTO users(username, password, email) VALUES('" + username + "', '" + password + "', '" + email + "');";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
@@ -342,7 +344,7 @@ namespace WebWinkelGroep5.Controllers
             {
                 cmd.ExecuteNonQuery();
             }
-            catch(MySqlException ex)
+            catch (MySqlException ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 return false;
@@ -525,7 +527,7 @@ namespace WebWinkelGroep5.Controllers
         public static void changeProduct(int productId, String name, int price, String details, String imageURL)
         {
             String query = "UPDATE products SET ";
-            if(name.CompareTo("") == 0 && price == -1 && details.CompareTo("") == 0)//change image
+            if (name.CompareTo("") == 0 && price == -1 && details.CompareTo("") == 0)//change image
             {
                 query += "imageURL='" + imageURL + "' WHERE productId=" + productId;
             }
@@ -543,7 +545,7 @@ namespace WebWinkelGroep5.Controllers
             }
             else
                 System.Diagnostics.Debug.WriteLine("DO NOT PASS MULTIPLE FILLED VARIABLES! you can only change one at a time!");
-            
+
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
@@ -560,3 +562,4 @@ namespace WebWinkelGroep5.Controllers
 
     }
 }
+

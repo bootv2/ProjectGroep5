@@ -18,46 +18,56 @@
 
 <h2 align="center"> Contactgegevens</h2>
 <form action="../Bestelling/setGegevens" method="post">
-    Bedrijfsnaam
+    <fieldset>
+        @using (Html.BeginForm())
+        {
+            <p>Bedrijfsnaam</p>
             <input id="bedrijfsnaam" type="text">
-        
-        
-            Voornaam
+
+
+            <p>Bedrijfsnaam</p>
             <input id="voornaam" type="text">
-        
 
-        
-            Achternaam
+
+
+            <p>Bedrijfsnaam</p>
             <input id="naam" type="text">
-        
 
-        
-            Adres
+
+
+            <p>Bedrijfsnaam</p>
             <input id="adres" type="text">
-        
 
-        
-            Postcode
+
+
+            <p>Bedrijfsnaam</p>
             <input id="postcode" type="text">
-        
 
-        
-            Land
+
+
+            <p>Bedrijfsnaam</p>
             <input id="land" type="text">
-        
 
-        
-            Nummer
+
+
+            <p>Bedrijfsnaam</p>
             <input id="tel" type="text">
-        
-            Stad
-            <input id="stad" type="text" />
-            <input id="userid" type="hidden" value="@Model.userId"> 
-        
 
-        
-            <input value="Verstuur" type="submit"/>
-            
+
+            @Html.ValidationSummary()
+            <p>E-mailadres: </p>
+            <p>@Html.TextBoxFor(m => m.To)</p>
+
+
+
+            <input id="userid" type="hidden" value="@Model.userId">
+
+
+
+            <input value="Verstuur" type="submit" />
+        }
+    </fieldset>
+
                 <input type="radio" id="man" name="sex" value="male" checked>ja
                 <input type="radio" name="sex" value="female">nee
 
