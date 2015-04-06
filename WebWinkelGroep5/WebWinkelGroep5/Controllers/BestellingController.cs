@@ -63,7 +63,7 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult setGegevens(String bedrijfsnaam, String voornaam, String naam, String adres, String postcode, String land, String stad, String tel)
         {
-
+            bestelling = new BestellingModel();
             DatabaseController.setUserDetails(voornaam + " " + naam, adres, stad, postcode, tel, (String)Session["Username"]);
 
             bestelling.items = DatabaseController.getBestelling((int)Session["BestellingId"]);
