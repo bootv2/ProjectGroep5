@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebWinkelGroep5.Models;
 
 namespace WebWinkelGroep5.Controllers
 {
@@ -10,13 +11,14 @@ namespace WebWinkelGroep5.Controllers
     {
         public ActionResult LoginPage(String thisurl)
         {
-            ViewBag.url = thisurl;
-            return View();
+            AccountModel model = new AccountModel();
+            model.lastUrl = thisurl;
+            return View(model);
         }
         //
         // GET: /Account/
 
-        public ActionResult Login(String username, String password)
+        public ActionResult Login(String username, String password, String redirect)
         {
             if(DatabaseController.login(username, password))
                 {
@@ -30,7 +32,9 @@ namespace WebWinkelGroep5.Controllers
                 { 
                     ViewBag.message = "Username or password wrong!";
                 }
-            return View();
+            AccountModel model = new AccountModel();
+            model.lastUrl = redirect;
+            return View(model);
         }
 
         public ActionResult RegisterPage()

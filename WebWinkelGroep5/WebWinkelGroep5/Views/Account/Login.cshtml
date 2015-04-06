@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WebWinkelGroep5.Models.AccountModel
+@{
     ViewBag.Title = "Log in";
 }
 
@@ -8,6 +9,9 @@
 
 <section id="loginForm">
 <h2>@ViewBag.Message</h2>
+    <br />
+    <a href="@Model.lastUrl">Klik hier om terug te gaan naar de laatste pagina!</a>
+    </section>
 
 
 @section Scripts {

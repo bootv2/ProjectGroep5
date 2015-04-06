@@ -194,6 +194,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\BestellingModel.cs" />
     <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\ProductListModel.cs" />
@@ -370,6 +371,7 @@
     <Content Include="Views\Bestelling\MaakBestelling.cshtml" />
     <Content Include="Views\Bestelling\Index.cshtml" />
     <Content Include="Views\Bestelling\SetGegevens.cshtml" />
+    <Content Include="Views\Bestelling\showNewBestelling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
