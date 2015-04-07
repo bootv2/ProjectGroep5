@@ -1,9 +1,20 @@
 ﻿@model WebWinkelGroep5.Models.WinkelmandModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Uw winkelmand</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Uw winkelmand!</h2><br />
+<h2>Uw winkelmand!</h2>
+<br />
 
 @{
     if (Model != null)
@@ -20,4 +31,6 @@
     }
 }
 
-<br><br><a href='../Bestelling/MaakBestelling'>Plaats Bestelling</a>@model WebWinkelGroep5.Models.WinkelmandModel
+<br>
+<br>
+<a href='../Bestelling/MaakBestelling'>Plaats Bestelling</a>@model WebWinkelGroep5.Models.WinkelmandModel

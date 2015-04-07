@@ -1,4 +1,14 @@
 ﻿@model WebWinkelGroep5.Models.ProductModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Product wijzigen</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,14 +20,14 @@
         <input type="file" name="Image" />
         <br />
         <input type="submit" value="Upload" />
-        
+
         <input name="action" value="submit" type="hidden">
     </fieldset>
 </form>
 <form action="~/Product/changename?productId=@Model.productId" method="post" enctype="multipart/form-data">
     <fieldset>
         Naam:<br>
-        
+
         <input name="name" size="30" type="text"><br>
         <input value="Verzend" type="submit">
     </fieldset>
@@ -25,7 +35,7 @@
 <form action="~/Product/changeprice?productId=@Model.productId" method="post" enctype="multipart/form-data">
     <fieldset>
         Prijs:<br>
-        
+
         <input name="price" size="30" type="number"><br>
         <input value="Verzend" type="submit">
     </fieldset>
@@ -33,7 +43,7 @@
 <form action="~/Product/changedetails?productId=@Model.productId" method="post" enctype="multipart/form-data">
     <fieldset>
         Details:<br>
-        
+
         <textarea name="details" rows="7" cols="30"></textarea><br>
         <input value="Verzend" type="submit">
     </fieldset>

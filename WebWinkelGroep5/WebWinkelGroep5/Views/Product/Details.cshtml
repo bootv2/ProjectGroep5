@@ -1,23 +1,34 @@
 ﻿@model WebWinkelGroep5.Models.ProductModel
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Product wijzigen</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
-<img src="@Model.imageURL" alt="Sorry voor het ongemak!" style="width:auto;height:228px"><br />
-@Model.details <br />
+<img src="@Model.imageURL" alt="Sorry voor het ongemak!" style="width:auto;height:228px">
+<br />
+@Model.details
+<br />
 <a href="../Winkelmand/AddToWinkelmand?productId=@Model.productId&amount=1">Stop in winkelmand</a>
-   @{if (Session["isAdmin"] !=null)
-   {
-   if ((bool)Session["isAdmin"])
-   {
-    <li><a href="../product/changeproduct?productId=@Model.productId">Bewerken</a></li>
+@{if (Session["isAdmin"] != null)
+{
+    if ((bool)Session["isAdmin"])
+    {
+        <li><a href="../product/changeproduct?productId=@Model.productId">Bewerken</a></li>
     }
-    }
-    }
+}
+}
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 

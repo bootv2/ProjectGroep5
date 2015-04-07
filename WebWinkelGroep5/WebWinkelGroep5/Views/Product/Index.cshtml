@@ -1,5 +1,14 @@
 ﻿@model WebWinkelGroep5.Models.ProductListModel
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Producten</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,9 +17,9 @@
 @{
     foreach (WebWinkelGroep5.Models.ProductModel m in Model.productList)
     {
-        
-            <a href="../Product/details?productId=@m.productId"><img src="@m.imageURL" title="@m.name" alt="Sorry voor het ongemak" style="width:auto;height:228px"></a>
-            
+
+        <a href="../Product/details?productId=@m.productId"><img src="@m.imageURL" title="@m.name" alt="Sorry voor het ongemak" style="width:auto;height:228px"></a>
+
     }
 }
 @section Scripts {

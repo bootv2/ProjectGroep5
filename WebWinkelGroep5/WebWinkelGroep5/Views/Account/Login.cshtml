@@ -1,17 +1,27 @@
 ﻿@model WebWinkelGroep5.Models.AccountModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Log in</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+}
 
 <hgroup class="title">
     <h1>Log in.</h1>
 </hgroup>
 
 <section id="loginForm">
-<h2>@Model.loginMessage</h2>
+    <h2>@Model.loginMessage</h2>
     <br />
     <a href="@Model.lastUrl">Klik hier om terug te gaan naar de laatste pagina!</a>
-    </section>
+</section>
 
 
 @section Scripts {

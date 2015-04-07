@@ -1,4 +1,14 @@
 ﻿@model WebWinkelGroep5.Models.BestellingModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Nieuwe bestelling</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -14,7 +24,7 @@
             <h3>@(item.amount)x @WebWinkelGroep5.Controllers.DatabaseController.getProductName(item.productId) a @(WebWinkelGroep5.Controllers.DatabaseController.getProductPrice(item.productId) * item.amount)</h3>
         }
     }
-    }
+}
 
 <h2 align="center"> Contactgegevens</h2>
 <form action="../Bestelling/setGegevens" method="post">
@@ -69,12 +79,12 @@
         }
     </fieldset>
 
-                <input type="radio" id="man" name="sex" value="male" checked>ja
-                <input type="radio" name="sex" value="female">nee
+    <input type="radio" id="man" name="sex" value="male" checked>ja
+    <input type="radio" name="sex" value="female">nee
 
-                <br>Wilt u een bevestiging?
-            
-        
+    <br>Wilt u een bevestiging?
+
+
 
 
 </form>
