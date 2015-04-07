@@ -22,8 +22,6 @@ namespace WebWinkelGroep5.Controllers
         [HttpPost]
         private void SendMail(WebWinkelGroep5.Models.MailModel _objModelMail)
         {
-            if (ModelState.IsValid)
-            {
                 SmtpClient smtpClient = new SmtpClient();
                 smtpClient.Host = "smtp.googlemail.com";
                 smtpClient.Port = 587;
@@ -35,13 +33,12 @@ namespace WebWinkelGroep5.Controllers
 
                 //Setting From , To and CC
                 mail.To.Add(_objModelMail.To);
-                mail.From = new MailAddress("wooods-info@compuboot.in");
+                //mail.From = new MailAddress("wooods-info@compuboot.in");
                 mail.Subject = _objModelMail.Subject;
                 string Body = _objModelMail.Body;
                 mail.Body = mail.From + "<br><br>" + Body;
                 mail.IsBodyHtml = true;
                 smtpClient.Send(mail);
-            }
         }
 
 
@@ -57,7 +54,6 @@ namespace WebWinkelGroep5.Controllers
             {
                 DatabaseController.addBestellingLine(bestellingId, m.productId, m.amount, bestelling.userId);
             }
-
             return View(bestelling);
         }
 
