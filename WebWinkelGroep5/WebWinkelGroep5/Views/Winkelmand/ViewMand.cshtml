@@ -17,6 +17,7 @@
 <br />
 
 @{
+
     if (Model != null)
     {
         List<WebWinkelGroep5.Models.WinkelmandItemModel> items = Model.items;
@@ -29,8 +30,19 @@
     {
         <a href="../Product/Index">Uw winkelmand is nog leeg. Klik hier om producten te kiezen!</a>
     }
+
 }
 
 <br>
 <br>
+@if(Session["Username"] != null)
+    {
 <a href='../Bestelling/MaakBestelling?prevUrl=/Winkelmand/Viewmand'>Plaats Bestelling</a>
+}
+    else
+    {
+<form action="~/Account/LoginPage" method="post">
+    <input name="thisurl" id="thisurl" type="hidden" value="~/Winkelmand/ViewMand" />
+    <input type="submit" value="Klik hier om in te loggen!" />
+</form>
+    }

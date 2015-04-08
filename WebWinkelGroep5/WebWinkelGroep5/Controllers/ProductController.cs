@@ -14,6 +14,15 @@ namespace WebWinkelGroep5.Controllers
         //
         // GET: /Product/
 
+        public ActionResult SearchProduct(String productName)
+        {
+            List<ProductModel> productList = DatabaseController.findProducts(productName);
+            ProductListModel model = new ProductListModel();
+            model.productList = productList;
+
+            return View(model);//only returns entries where the full name is the search string. ----> TODO: make it return entries where a partial match is found.
+        }
+
         public ActionResult Index()
         {
             List<ProductModel> productList = DatabaseController.getProductList();
@@ -75,6 +84,7 @@ namespace WebWinkelGroep5.Controllers
 
         public ActionResult changeDetails(String details, int productId)
         {
+            
             ProductModel model = new ProductModel();
             model.productId = productId;
             DatabaseController.changeProduct(productId, "", -1, details, "");

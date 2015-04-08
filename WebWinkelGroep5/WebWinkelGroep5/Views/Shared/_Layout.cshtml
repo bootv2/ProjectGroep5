@@ -10,15 +10,17 @@
                         @Html.Partial("_LoginPartial")
                     </section>
                     <nav>
-                        <ul id="menu">
+                        <ul id="menu" style="float:left">
                             <li>@Html.ActionLink("Wooods", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Over ons", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "SendMailer")</li>
-                            <li><a href="~/winkelmand/viewmand">Winkelmand</a></li>
-                            <li><a href="~/Home/TOS">Terms of service</a></li>
-                            <li><a href="~/Home/Disclaimer">Disclaimer</a></li>
                             <li><a href="~/Product/">Producten</a></li>
+                            <li><a href="~/winkelmand/viewmand">Winkelmand</a></li>
+                            <li>@Html.ActionLink("Over ons", "About", "Home")</li>
                             <li><a href="~/Home/Werknemers">Werknemers</a></li>
+                            <li>@Html.ActionLink("Contact", "Contact", "SendMailer")</li>
+                            <li><a href="~/Home/TOS">Algemene voorwaarden</a></li>
+                            <li><a href="~/Home/Disclaimer">Disclaimer</a></li>
+                            
+                            
                             @{
                                 if (Session["isAdmin"] != null)
                                 {
@@ -42,7 +44,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.Now.Year - Wooods B.V.</p>
                 </div>
             </div>
         </footer>

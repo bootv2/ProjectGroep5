@@ -24,7 +24,7 @@ namespace WebWinkelGroep5.Controllers
         public static void initDatabaseController()
         {
             //Vul hier de juiste gegevens in!!
-            conn = new MySqlConnection("server=127.0.0.1; database=webwinkelinfc; user id=root; password=; pooling = false;");
+            conn = new MySqlConnection("server=127.0.0.1; database=webwinkel; user id=root; password=33662648; pooling = false;");
 
             try
             {
@@ -35,6 +35,60 @@ namespace WebWinkelGroep5.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 throw (ex);
             }
+        }
+
+        public static List<ProductModel> findProducts(String searchString)
+        {
+            List<ProductModel> result = new List<ProductModel>();
+            List<ProductModel> allNames = new List<ProductModel>();
+            String query = "SELECT * FROM products";
+
+            String name;
+            String details;
+            String imageURL;
+            int price;
+            ProductModel filler = new ProductModel();
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dataReader = null;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                //throw new Exception();
+            }
+            while (dataReader.Read())
+            {
+                filler = new ProductModel();
+                name = dataReader.GetString("name");
+                details = dataReader.GetString("details");
+                imageURL = dataReader.GetString("imageURL");
+                price = dataReader.GetInt32("price");
+
+                filler.productId = dataReader.GetInt32("productId");
+                filler.name = name;
+                filler.details = details;
+                filler.imageURL = imageURL;
+                filler.price = price;
+
+                allNames.Add(filler);
+            }
+            dataReader.Close();
+
+            //check if the searchString is present anywhere
+
+            foreach(ProductModel p in allNames)
+            {
+                if (p.name.Contains(searchString))
+                    result.Add(p);
+            }
+
+            return result;
         }
 
         public static List<WinkelmandItemModel> getBestelling(int bestellingId)
