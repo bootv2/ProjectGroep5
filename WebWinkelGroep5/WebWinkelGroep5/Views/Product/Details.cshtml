@@ -1,34 +1,32 @@
 ﻿@model WebWinkelGroep5.Models.ProductModel
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>Product wijzigen</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-<img src="@Model.imageURL" alt="Sorry voor het ongemak!" style="width:auto;height:228px">
-<br />
-@Model.details
-<br />
-<a href="../Winkelmand/AddToWinkelmand?productId=@Model.productId&amount=1">Stop in winkelmand</a>
-@{if (Session["isAdmin"] != null)
-{
-    if ((bool)Session["isAdmin"])
+<script>document.title = "Details"</script>
+    <h2>Details</h2>
+    <img src="@Model.imageURL" alt="Sorry voor het ongemak!" style="width:auto;height:228px">
+    <br />
+    @Model.details
+    <br />
+    <form action="../Winkelmand/AddToWinkelmand" method="post">
+        Hoeveelheid
+        <input id="productId" name="productId" type="hidden" value="@Model.productId" />
+        <input id="amount" name="amount" type="number" />
+        <input type="submit" value="Stop in winkelmand" />
+    </form>
+    @{if (Session["isAdmin"] != null)
     {
-        <li><a href="../product/changeproduct?productId=@Model.productId">Bewerken</a></li>
+        if ((bool)Session["isAdmin"])
+        {
+            <form action="../product/changeproduct" method="post">
+                <input type="hidden" id="productId" name="productId" value="@Model.productId"/>
+                
+                <input type="submit" value="Bewerken" />
+            </form>
+        }
     }
-}
-}
+    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
