@@ -1,0 +1,40 @@
+﻿@model List<WebWinkelGroep5.Models.BestellingStatus>
+
+@{
+    ViewBag.Title = "BestellingenOverzicht";
+}
+
+<h2>BestellingenOverzicht</h2>
+Uw huidige bestellingen:
+<hr />
+
+@if (@ViewBag.FoutMelding != null)
+{
+    <span style="color:Red"> @ViewBag.FoutMelding </span>
+}
+@if (Model != null)
+{
+    <table id="hor-minimalist-b">
+        <thead>
+            <tr>
+                <th>BestellingID</th>
+                <th>GebruikerID</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@Model[i].bestellingId</td>
+                    <td>@Model[i].userId</td>
+                    <td>@Model[i].bestellingStatus</td>
+
+                    <td>@Html.ActionLink("Update", "WijzigBestellingStatus", new { bestellingId = @Model[i].bestellingId })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<hr />

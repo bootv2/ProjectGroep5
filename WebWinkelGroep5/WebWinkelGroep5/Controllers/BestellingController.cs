@@ -19,6 +19,43 @@ namespace WebWinkelGroep5.Controllers
             return View();
         }
 
+         public ActionResult BestellingenOverzicht()
+        {
+            List<BestellingStatus> bestelling = DatabaseController.GetBestellingen();
+            return View();
+        }
+        
+        public ActionResult WijzigBestellingStatus(int bestellingId)
+        {
+            try
+            {
+                BestellingStatus bestelling = DatabaseController.GetBestelling(bestellingId);
+                return View();
+            }
+            catch (Exception e)
+            {
+                ViewBag.FoutMelding("Er is iets fout gegaan: " + e);
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult WijzigBestellingStatus(BestellingStatus bestelling)
+        {
+            try
+            {
+                DatabaseController.WijzigBestelling(bestelling);
+                return RedirectToAction("BestellingenOverzicht", "Product");
+            }
+            catch (Exception e)
+            {
+                ViewBag.FoutMelding("Er is iets fout gegaan: " + e);
+                return View();
+            }
+        }
+
+    
+
         [HttpPost]
         private void SendMail(WebWinkelGroep5.Models.MailModel _objModelMail)
         {

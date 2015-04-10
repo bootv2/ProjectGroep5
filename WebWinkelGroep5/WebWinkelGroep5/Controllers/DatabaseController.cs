@@ -37,6 +37,141 @@ namespace WebWinkelGroep5.Controllers
             }
         }
 
+        
+        public static List<BestellingStatus> GetBestellingen()
+        {
+            List<BestellingStatus> bestellingen = new List<BestellingStatus>();
+            BestellingStatus dummy;
+            try
+            {
+                string selectQuery = "SELECT * FROM bestelling";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    dummy = new BestellingStatus();
+                    int bestellingId = dataReader.GetInt32("bestellingId");
+                    int userId = dataReader.GetInt32("userId");
+                    dummy.bestellingId = bestellingId;
+                    dummy.userId = userId;
+                    bestellingen.Add(dummy);
+                }
+                dataReader.Close();
+            }
+            catch (Exception e)
+            {
+                Console.Write("Ophalen van bestellingen mislukt " + e);
+                throw e;
+            }
+
+            
+            return bestellingen;
+        }
+
+        public static BestellingStatus GetBestelling(int bestellingId)
+        {
+            BestellingStatus bestelling = null;
+
+            try
+            {
+                string selectQuery = "SELECT * FROM Bestelling WHERE bestellingId=@bestellingId";
+                MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
+
+                MySqlParameter idParam = new MySqlParameter("@bestellingId", MySqlDbType.Int32);
+                idParam.Value = bestellingId;
+                System.Diagnostics.Debug.Print("bestellingId: " + bestellingId.ToString());
+                cmd.Parameters.Add(idParam);
+                cmd.Prepare();
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                if (dataReader.Read())
+                {
+                    int userId = dataReader.GetInt32("userId");
+                    
+                }
+                dataReader.Close();
+            }
+            catch (Exception e)
+            {
+
+                Console.Write("Ophalen van aanbieding mislukt " + e);
+                throw e;
+            }
+            
+            return bestelling;
+        }
+
+        public static void WijzigBestelling(BestellingStatus bestelling)
+        {
+            MySqlTransaction trans = null;
+            try
+            {
+                trans = conn.BeginTransaction();
+                string insertString = @"update Bestelling set BestellingStatus=@Status where bestellingId = @bestellingId;";
+
+                MySqlCommand cmd = new MySqlCommand(insertString, conn);
+                MySqlParameter statusParam = new MySqlParameter("@Status", MySqlDbType.VarChar);
+                MySqlParameter idParam = new MySqlParameter("@bestellingId", MySqlDbType.Int32);
+
+                statusParam.Value = bestelling.bestellingStatus;
+                idParam.Value = bestelling.bestellingId;
+
+                System.Diagnostics.Debug.Print("Status: " + bestelling.bestellingStatus.ToString());
+                System.Diagnostics.Debug.Print("bestellingId: " + bestelling.bestellingId.ToString());
+
+                cmd.Parameters.Add(statusParam);
+                cmd.Parameters.Add(idParam);
+
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                trans.Commit();
+            }
+            catch (Exception e)
+            {
+                trans.Rollback();
+                Console.Write("Status aanpassen niet gelukt: " + e);
+                throw e;
+            }
+            
+        }
+
+        public static List<BestellingStatus> Bestellinghistory(int bestellingId)
+        {
+            List<BestellingStatus> result = new List<BestellingStatus>();
+            BestellingStatus dummy;
+            String query = "SELECT * FROM bestelling WHERE bestellingId=" + bestellingId;
+            int userId = -1;
+            
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dataReader;
+
+            try
+            {
+                //Create a data reader and Execute the command
+                dataReader = cmd.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                throw new Exception();
+            }
+            while (dataReader.Read())
+            {
+                dummy = new BestellingStatus();
+                userId = dataReader.GetInt32("userId");                
+                dummy.userId = userId;
+                result.Add(dummy);
+            }
+            dataReader.Close();
+
+            return result;
+        }
+
+        
+        
+
         public static List<ProductModel> findProducts(String searchString)
         {
             List<ProductModel> result = new List<ProductModel>();

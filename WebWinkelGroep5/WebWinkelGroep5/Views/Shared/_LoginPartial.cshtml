@@ -1,31 +1,38 @@
-﻿
-        @{if(Session["Username"] == null)
-        {
-            <text>Hallo!</text>
-        }
-        else
-        {
-            <text>Hallo, @Session["Username"]!</text>
-        }
-        }
+﻿@{if (Session["Username"] == null)
+{
+    <text>Hallo!</text>
+}
+else
+{
+    <text>Hallo, @Session["Username"]!</text>
+}
+}
 
-    <ul>
-        
+<ul>
+    @if (Session["Username"] == null)
+    {
         <li>
             <form action="~/Account/registerpage" method="post" style="float:right">
                 <input type="submit" value="Registreer!" />
             </form>
         </li>
-        <li><form action="~/Account/Logoff" method="post" style="float:right">
-    <input type="submit" value="Log uit!" />
-</form></li>
         <li>
             <form action="~/Account/LoginPage" method="post" onsubmit="document.getElementById('thisurl').value = document.URL;" style="float:right">
                 <input name="thisurl" id="thisurl" type="hidden" />
                 <input type="submit" value="Log In!" />
             </form>
-</li>
-    </ul>
+        </li>
+    }
+    else
+    {
+        <li>
+            <form action="~/Account/Logoff" method="post" style="float:right">
+                <input type="submit" value="Log uit!" />
+            </form>
+        </li>
+    }
+
+</ul>
 <br />
 <br />
 <br />

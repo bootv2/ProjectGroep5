@@ -14,9 +14,9 @@ namespace WebWinkelGroep5.Controllers
         //
         // GET: /Product/
 
-        public ActionResult SearchProduct(String productName)
+        public ActionResult SearchProduct(String Zoeken)
         {
-            List<ProductModel> productList = DatabaseController.findProducts(productName);
+            List<ProductModel> productList = DatabaseController.findProducts(Zoeken);
             ProductListModel model = new ProductListModel();
             model.productList = productList;
 

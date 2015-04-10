@@ -25,14 +25,14 @@
 
 <br>
 <br>
-@if(Session["Username"] != null)
-    {
-<a href='../Bestelling/MaakBestelling?prevUrl=/Winkelmand/Viewmand'>Plaats Bestelling</a>
+@if (Session["Username"] != null)
+{
+    <a href='../Bestelling/MaakBestelling?prevUrl=/Winkelmand/Viewmand'>Plaats Bestelling</a>
 }
-    else
-    {
-<form action="~/Account/LoginPage" method="post">
-    <input name="thisurl" id="thisurl" type="hidden" value="~/Winkelmand/ViewMand" />
-    <input type="submit" value="Klik hier om in te loggen!" />
-</form>
-    }
+else
+{
+    <form action="~/Account/LoginPage" method="post">
+        <input name="thisurl" id="thisurl" type="hidden" value="~/Winkelmand/ViewMand" />
+        <input type="submit" value="Klik hier om in te loggen!" />
+    </form>
+}

@@ -15,6 +15,10 @@
                 <p class="site-title"><img src="~/Images/logo.png" href="~/" /> @Html.ActionLink("Wooods", "Index", "Home")</p>
             </div>
             <div class="float-right">
+                <form action="~/product/searchproduct" method="post" id="searchform" name="searchform">
+                    <input type="text" name="Zoeken" id="Zoeken" onkeypress="handle" />
+
+                </form>
                 <section id="login">
                     @Html.Partial("_LoginPartial")
                 </section>
@@ -59,6 +63,15 @@
     </footer>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
     @Scripts.Render("~/bundles/jquery")
+    <script>
+    function handle(e) {
+        if (e.keyCode === 13) {
+            document.getElementById("searchform").submit();
+        }
+
+        return false;
+    }
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
